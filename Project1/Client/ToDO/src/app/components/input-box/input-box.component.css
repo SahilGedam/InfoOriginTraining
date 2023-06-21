@@ -1,0 +1,22 @@
+.error {
+  border: 1px solid red;
+}
+.mb-3 {
+  /* border: 1px solid red; */
+ width: 80%;
+}
+.parent {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: row;
+}
+.button-div {
+    /* float: right; */
+  /* display: flex;
+  flex-direction: column; */
+  margin-top: 30px;
+}
+button {
+  margin: 8px;
+  padding: 8px;
+}

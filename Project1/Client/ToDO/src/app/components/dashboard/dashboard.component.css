@@ -1,0 +1,11 @@
+button {
+    margin: 8px;
+    padding: 8px;
+}
+table {
+    width: 100%;
+}
+.dashboard-container{
+    width: 100%;
+    border: 1px solid red;
+}

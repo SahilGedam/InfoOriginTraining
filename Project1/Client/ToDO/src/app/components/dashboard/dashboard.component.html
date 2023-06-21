@@ -1,0 +1,26 @@
+
+<h3>Task List</h3>
+<div class="table-responsive">
+<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Task</th>
+      <th scope="col">Action</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tasks of taskList">
+      <th>{{ tasks.id }}</th>
+      <th style="word-wrap: break-word;min-width: 650px;max-width: 650px;">{{ tasks.task }}</th>
+      <th>
+        <div class="btn-div">
+          <button class="btn btn-primary" (click)="updateTask(tasks.id)">update</button>
+          <button class="btn btn-danger" (click)="deleteTask(tasks.id)">delete</button>
+        </div>
+      </th>
+    </tr>
+  </tbody>
+</table>
+</div>
