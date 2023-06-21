@@ -1,19 +1,29 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataServiceService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+//provite data to dashboard
+  data: any;
 
-  data = [
-    { id: 1, task: 'task111111111111111111111111111111111111' },
-    { id: 2, task: '111111111111111111111111111111' },
-    { id: 3, task: 'tkjcsdcsd111111111111111111111' },
-    { id: 4, task: 'vinsdivlshvnilsu1111111111111111111' },
-    {
-      id: 5,
-      task: 'vinsdivlshvnilsu11111111111sdvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv11111111',
-    },
-  ];
+  url = 'http://localhost:8080/';
+  //get data get
+  getData() {
+    return this.http.get(`${this.url}users`);
+  }
+  //update
+  updateData(taskId:any,data: any) {
+    return this.http.put(`${this.url}update/${taskId}`, data);
+  }
+  // save data
+  saveData(data: any) {
+    return this.http.post("http://localhost:8080/save", data);
+  }
+  // delete
+  deleteData(data: any) {
+    return this.http.delete(`http://localhost:8080/delete/${data}`);
+  }
 }

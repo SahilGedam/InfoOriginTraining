@@ -20,11 +20,18 @@ export class EditFormComponent implements OnInit {
     task: '',
   };
   registerFn() {
+    let taskSent ={
+      task : this.form.task
+    }
     console.log(this.form.task);
-    this.dataservice.data.push({
-      id: this.taskId,
-      task: this.form.task,
-    });
+    // this.dataservice.data.push({
+    //   id: this.taskId,
+    //   task: this.form.task,
+    // });
+    this.dataservice.updateData(this.taskId,taskSent).subscribe((data)=>{
+      console.log(data);
+      
+    })
     this.router.navigate([''])
   }
   clearFn() {
