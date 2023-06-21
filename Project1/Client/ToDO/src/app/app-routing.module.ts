@@ -8,7 +8,7 @@ import { InputBoxComponent } from './components/input-box/input-box.component';
 const routes: Routes = [
 
   {path: '', component:HomePageComponent},
-  {path:'edit/:id', component:EditFormComponent},
+  {path:'edit/:id/:previousTask', component:EditFormComponent},
   {path: 'dashboard', component:DashboardComponent},
   {path : 'input',component:InputBoxComponent}
 ];

@@ -9,30 +9,36 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 })
 export class EditFormComponent implements OnInit {
   taskId: any;
+  previousTask: any = '';
   constructor(
     private dataservice: DataServiceService,
-    private activatedRoute: ActivatedRoute,private router : Router
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.taskId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.previousTask =
+      this.activatedRoute.snapshot.paramMap.get('previousTask');
+    this.form.task = this.previousTask;
   }
   form = {
     task: '',
   };
   registerFn() {
-    let taskSent ={
-      task : this.form.task
-    }
+    let taskSent = {
+      task: this.form.task,
+    };
     console.log(this.form.task);
-    // this.dataservice.data.push({
-    //   id: this.taskId,
-    //   task: this.form.task,
-    // });
-    this.dataservice.updateData(this.taskId,taskSent).subscribe((data)=>{
-      console.log(data);
-      
-    })
-    this.router.navigate([''])
+
+    this.dataservice.updateData(this.taskId, taskSent).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    this.router.navigate(['']);
   }
   clearFn() {
     this.form.task = '';

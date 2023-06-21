@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 @Injectable({
   providedIn: 'root',
 })
 export class DataServiceService {
   constructor(private http: HttpClient) {}
 //provite data to dashboard
-  data: any;
+  data:any;
 
   url = 'http://localhost:8080/';
   //get data get
   getData() {
+    // this.data= this.http.get(`${this.url}users`);
     return this.http.get(`${this.url}users`);
   }
   //update
