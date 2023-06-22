@@ -1,0 +1,108 @@
+<div class="container">
+  <h3>Input Box Form</h3>
+  <div class="parent">
+    <div class="mb-3">
+      <form>
+        <div class="text-input">
+          <label for="task">Input Task</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="task"
+            placeholder="Enter Task"
+            [(ngModel)]="form.task"
+            name="task"
+            #task="ngModel"
+            required
+            maxlength="320"
+            [ngClass]="{ error: task.errors && task.touched }"
+          />
+        </div>
+        <div class="second-input">
+          <div class="date-input">
+            <div>
+              <label for="date">Input Deadline</label>
+            </div>
+            <input
+              type="date"
+              [ngClass]="{ error: task.errors && task.touched }"
+              required
+              #date="ngModel"
+              [(ngModel)]="form.time"
+              class="form-control form-control-lg"
+              placeholder="Enter Date"
+              name="date"
+              id="date"
+              [min]="currentDate"
+            />
+          </div>
+
+          <div class="button-div">
+            <button
+              class="btn btn-primary"
+              [disabled]="!form.task || !form.time || validateDate()"
+              (click)="registerFn()"
+            >
+              submit
+            </button>
+            <button class="btn btn-danger" (click)="clearFn()">clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- input box  inserted above  -->
+  <h3>Task List</h3>
+  <div class="table-responsive">
+    <table class="table table-responsive table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <!-- <th scope="col">not completed</th> -->
+
+          <th scope="col">DeadLine</th>
+          <th scope="col">Task</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let tasks of taskList; let i = index"
+          [ngClass]="!tasks.status ? 'completed-task' : ''"
+          >
+          <!-- [ngStyle]="{border: !tasks.status }" -->
+        <!-- <button [ngStyle]="{ color: colorName === 'red' ? 'red' : 'green' }" >click</button> -->
+          <th>{{ tasks.id }}</th>
+          <!-- <th>{{ tasks.status }}</th> -->
+          <th>{{ tasks.time }}</th>
+          <th style="word-wrap: break-word; min-width: 650px; max-width: 650px">
+            {{ tasks.task }}
+          </th>
+          <th>
+            <div class="btn-div-2">
+              <button
+                class="btn btn-primary"
+                [disabled]="!tasks.status"
+                (click)="updateTask(tasks.id, tasks.task, tasks.time)"
+              >
+                update
+              </button>
+
+              <button
+                [disabled]="!tasks.status"
+                class="btn btn-success"
+                (click)="completeTask(tasks)"
+              >
+                complete
+              </button>
+              <button class="btn btn-danger" (click)="deleteTask(tasks.id)">
+                delete
+              </button>
+            </div>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
