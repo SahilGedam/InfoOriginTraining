@@ -5,41 +5,29 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DataServiceService {
- 
-  data = [
-    {
-      id: 1,
-      status: true,
-      task: 'hello task',
-    },
-    {
-      id: 1,
-      status: true,
-      task: 'hello task',
-    },
-  ];
+
   constructor(private http: HttpClient) {}
 
-  url = 'http://localhost:3000/';
+  //get data get
+  url = 'http://localhost:8080/';
   //get data get
   getData() {
-    return this.http.get(`${this.url}ToDo/`);
+    return this.http.get(`${this.url}tasks`);
   }
   //update
   updateData(taskId: any, data: any) {
-    return this.http.put(`${this.url}ToDo/${taskId}`, data);
+    return this.http.put(`${this.url}update/${taskId}`, data);
   }
-  //completeTask
-  completeTask(taskId: any, data: any) {
-    return this.http.put(`${this.url}ToDo/${taskId}`, data);
-  }
-
   // save data
   saveData(data: any) {
-    return this.http.post(`${this.url}ToDo/`, data);
+    return this.http.post('http://localhost:8080/save', data);
   }
   // delete
   deleteData(data: any) {
-    return this.http.delete(`${this.url}ToDo/${data}`);
+    return this.http.delete(`http://localhost:8080/delete/${data}`);
+  }
+  //completeTask
+  completeTask(taskId: any, data: any) {
+    return this.http.put(`${this.url}complete/${taskId}`, data);
   }
 }

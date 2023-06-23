@@ -9,6 +9,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 })
 export class HomePageComponent implements OnInit {
   // tasks stored in taskList
+  taskRegex = /(?!^\d+$)^.+$/;
   taskList: any;
   constructor(
     private dataservice: DataServiceService,
@@ -18,12 +19,14 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     console.log('on initialization');
     this.getTaskList();
+    // console.log(this.currentDateNumber);
   }
   form = {
     task: '',
     time: '',
   };
   currentDate = new Date().toISOString().split('T')[0];
+  // currentDateNumber: number = +this.currentDate;
   // function to save data to database
   registerFn() {
     console.log(this.form);
@@ -42,14 +45,14 @@ export class HomePageComponent implements OnInit {
         console.log('data entered successfully');
       },
       (error) => {
-        // alert('duplicate entries not allowed');
+        alert('duplicate entries not allowed');
         console.log('called from error');
 
         console.log(error);
       }
     );
     console.log('code reachable ata line 88');
-    this.getTaskList();
+    // this.getTaskList();
   }
   // clear the input box
   clearFn() {
@@ -73,9 +76,9 @@ export class HomePageComponent implements OnInit {
   checkExpired(date: any) {
     if (date <= this.currentDate) {
       // return true;
-      this.styleTable='expired'
+      this.styleTable = 'expired';
     } else {
-      this.styleTable=''
+      this.styleTable = '';
       // return false;
     }
   }
@@ -97,12 +100,13 @@ export class HomePageComponent implements OnInit {
       time: data.time,
       status: false,
     };
+    console.log(taskSent);
 
     this.dataservice.completeTask(data.id, taskSent).subscribe((data) => {
       this.getTaskList();
       console.log(data);
     });
-    this.getTaskList();
+    // this.getTaskList();
   }
   //route to update task
   updateTask(data1: any, data2: any, data3: any): void {
@@ -133,6 +137,6 @@ export class HomePageComponent implements OnInit {
     console.log(data);
     console.log('code reached at line 54');
 
-    this.getTaskList();
+    // this.getTaskList();
   }
 }
