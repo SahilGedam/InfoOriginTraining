@@ -8,7 +8,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
   styleUrls: ['./edit-task.component.css'],
 })
 export class EditTaskComponent {
-  taskRegex = /(?!^\d+$)^.+$/;
+  taskRegex = /^.*[a-zA-Z].*$/;
   taskId: any;
   previousTask: any = '';
   time: any;

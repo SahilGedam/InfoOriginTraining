@@ -21,6 +21,9 @@
           id="task-text-area"
           rows="3"
         ></textarea>
+        <div *ngIf="task.invalid && task.errors && task.touched && form.task">
+            <p class="text-danger">Enter a Valid Task</p>
+          </div>
       </form>
 
       <div *ngIf="task.errors && task.touched">

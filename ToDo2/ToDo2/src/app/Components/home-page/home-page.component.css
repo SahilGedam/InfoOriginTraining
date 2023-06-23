@@ -32,6 +32,10 @@ table {
 .not-completed-task th {
   color: red;
 }
+.last-day th {
+  color: yellow;
+}
+
 h3 {
   color: #ffffff;
 }

@@ -9,50 +9,70 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 })
 export class HomePageComponent implements OnInit {
   // tasks stored in taskList
-  taskRegex = /(?!^\d+$)^.+$/;
   taskList: any;
+  //regex 
+  taskRegex = /^.*[a-zA-Z].*$/;
   constructor(
     private dataservice: DataServiceService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    console.log('on initialization');
+  
     this.getTaskList();
-    // console.log(this.currentDateNumber);
+
   }
   form = {
     task: '',
     time: '',
   };
+
   currentDate = new Date().toISOString().split('T')[0];
-  // currentDateNumber: number = +this.currentDate;
-  // function to save data to database
+ 
+  // functions of Input Box
+  validateInput() {
+    if (
+      this.form.task != '' &&
+      this.form.time != '' &&
+      !this.validateDate() &&
+      /[a-zA-Z]/.test(this.form.task)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   registerFn() {
     console.log(this.form);
     console.log(this.form.time, 'time');
+    let validForm = this.validateInput();
 
-    let taskSent = {
-      task: this.form.task,
-      time: this.form.time,
-      status: true,
-    };
-    console.log(this.form.task);
-    this.dataservice.saveData(taskSent).subscribe(
-      (data) => {
-        this.getTaskList();
-        console.log(data);
-        console.log('data entered successfully');
-      },
-      (error) => {
-        alert('duplicate entries not allowed');
-        console.log('called from error');
+    if (validForm) {
+      let taskSent = {
+        task: this.form.task,
+        time: this.form.time,
+        status: true,
+      };
+      console.log(this.form.task);
+      this.dataservice.saveData(taskSent).subscribe(
+        (data) => {
+          this.getTaskList();
+          console.log(data);
+          console.log('data entered successfully');
+          alert('Task entered successfully');
+        },
+        (error) => {
+          alert('duplicate Tasks not allowed');
+          console.log('called from error');
 
-        console.log(error);
-      }
-    );
-    console.log('code reachable ata line 88');
-    // this.getTaskList();
+          console.log(error);
+        }
+      );
+      console.log('code reachable ata line 88');
+      // this.getTaskList();
+    } else {
+      alert('enter proper input');
+    }
   }
   // clear the input box
   clearFn() {

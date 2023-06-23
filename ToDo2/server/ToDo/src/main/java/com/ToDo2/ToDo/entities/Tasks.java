@@ -1,5 +1,7 @@
 package com.ToDo2.ToDo.entities;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 @Entity
 @Table(name = "todo")
@@ -14,6 +16,8 @@ public class Tasks {
 	private Boolean status;
 	@Column
 	private String time;
+//	@Column
+//	private long remainingTime;
 	@Override
 	public String toString() {
 		return "Tasks [id=" + id + ", task=" + task + ", status=" + status + ", time=" + time + "]";
@@ -53,5 +57,11 @@ public class Tasks {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+//	public long getRemainingTime() {
+//		return remainingTime;
+//	}
+//	public void setRemainingTime(long remainingTime) {
+//		this.remainingTime = remainingTime;
+//	}
 
 }
