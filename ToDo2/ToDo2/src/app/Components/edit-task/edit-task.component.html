@@ -5,7 +5,7 @@
     <div class="mb-3">
       <form>
         <label for="task-text-area">Input Task</label>
-        <textarea
+        <input
           type="text"
           rows="3"
           class="form-control text-white bg-dark"
@@ -20,10 +20,10 @@
           [ngClass]="{ error: task.errors && task.touched }"
           id="task-text-area"
           rows="3"
-        ></textarea>
+        >
         <div *ngIf="task.invalid && task.errors && task.touched && form.task">
-            <p class="text-danger">Enter a Valid Task</p>
-          </div>
+          <p class="text-danger">Enter a Valid Task</p>
+        </div>
       </form>
 
       <div *ngIf="task.errors && task.touched">
@@ -33,13 +33,7 @@
       </div>
     </div>
     <div class="button-div">
-      <button
-        class="btn btn-primary"
-        [disabled]="!form.task || task.invalid"
-        (click)="registerFn()"
-      >
-        submit
-      </button>
+      <button class="btn btn-primary" (click)="registerFn()">submit</button>
       <button class="btn btn-danger" (click)="clearFn()">clear</button>
     </div>
   </div>

@@ -28,9 +28,19 @@ export class EditTaskComponent {
   form = {
     task: '',
   };
+
+  //validate input
+  validateInput() {
+    if (this.form.task != '' && /[a-zA-Z]/.test(this.form.task)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   registerFn() {
     console.log(this.taskId);
-    
+    let validForm = this.validateInput();
+    if (validForm) {
     // let taskSent = {
     //   task: this.form.task,
     // };
@@ -41,7 +51,7 @@ export class EditTaskComponent {
       status: true,
     };
     console.log(this.form.task);
-    console.log( 'in edit component');
+    console.log('in edit component');
 
     this.dataservice.updateData(this.taskId, taskSent).subscribe(
       (data) => {
@@ -54,6 +64,9 @@ export class EditTaskComponent {
         // alert("duplicate entries not allowed")
       }
     );
+  } else {
+    alert('enter proper input');
+  }
   }
   clearFn() {
     this.form.task = '';

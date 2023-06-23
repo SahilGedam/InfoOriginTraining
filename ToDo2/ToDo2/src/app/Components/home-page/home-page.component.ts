@@ -10,7 +10,7 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 export class HomePageComponent implements OnInit {
   // tasks stored in taskList
   taskList: any;
-  //regex 
+  //regex
   taskRegex = /^.*[a-zA-Z].*$/;
   constructor(
     private dataservice: DataServiceService,
@@ -18,9 +18,8 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  
     this.getTaskList();
-
+    this.form.time = new Date().toISOString().split('T')[0];
   }
   form = {
     task: '',
@@ -28,23 +27,38 @@ export class HomePageComponent implements OnInit {
   };
 
   currentDate = new Date().toISOString().split('T')[0];
- 
+
   // functions of Input Box
+  //validate input
+  validDate:any;
+  clicked:any;
   validateInput() {
+   
+    console.log("validate input is called");
+    
     if (
       this.form.task != '' &&
       this.form.time != '' &&
-      !this.validateDate() &&
+      !this.validDate &&
       /[a-zA-Z]/.test(this.form.task)
     ) {
+      console.log(this.form.task);
+      console.log(this.form.time);
+      console.log(this.validateDate());
+      
+      
+      
       return true;
     } else {
       return false;
     }
   }
   registerFn() {
+    this.clicked=true;
     console.log(this.form);
     console.log(this.form.time, 'time');
+    // check if inputs are valid
+    this.validDate=this.validateDate();
     let validForm = this.validateInput();
 
     if (validForm) {
@@ -77,13 +91,16 @@ export class HomePageComponent implements OnInit {
   // clear the input box
   clearFn() {
     this.form.task = '';
+    this.clicked=false;
     this.form.time = this.currentDate;
   }
   validateDate() {
-    if (this.form.time <= this.currentDate) {
-      return true;
-    } else {
+    if (this.form.time >= this.currentDate || this.form.time===this.currentDate) {
+      console.log('date validated');
       return false;
+      
+    } else {
+      return true;
     }
   }
 
@@ -91,18 +108,19 @@ export class HomePageComponent implements OnInit {
   // dashboard code below
   // function to fetch tasks
 
-  styleTable = '';
+  // styleTable = '';
 
-  checkExpired(date: any) {
-    if (date <= this.currentDate) {
-      // return true;
-      this.styleTable = 'expired';
-    } else {
-      this.styleTable = '';
-      // return false;
-    }
-  }
+  // checkExpired(date: any) {
+  //   if (date <= this.currentDate) {
+  //     // return true;
+  //     this.styleTable = 'expired';
+  //   } else {
+  //     this.styleTable = '';
+  //     // return false;
+  //   }
+  // }
 
+  // fetch all tasks
   getTaskList() {
     this.dataservice.getData().subscribe((data) => {
       this.taskList = data;
@@ -111,13 +129,12 @@ export class HomePageComponent implements OnInit {
 
     console.log(this.taskList, 'task list');
   }
-  stylesFunction() {}
+  // update if task is completed
   completeTask(data: any) {
     console.log(data);
     let taskSent = {
       id: data.id,
       task: data.task,
-      time: data.time,
       status: false,
     };
     console.log(taskSent);
@@ -126,7 +143,6 @@ export class HomePageComponent implements OnInit {
       this.getTaskList();
       console.log(data);
     });
-    // this.getTaskList();
   }
   //route to update task
   updateTask(data1: any, data2: any, data3: any): void {

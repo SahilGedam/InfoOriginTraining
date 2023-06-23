@@ -1,10 +1,7 @@
 package com.ToDo2.ToDo.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -13,15 +10,16 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ToDo2.ToDo.entities.Tasks;
 import com.ToDo2.ToDo.repo.TasksRepo;
-
-import ch.qos.logback.core.util.Duration;
-//import com.ToDo2.ToDo.services.TaskService;
-//import com.todo.ToDoservices.model.User; 
 
 @RestController
 public class MyController {
@@ -48,23 +46,21 @@ public class MyController {
 //			System.out.println(dateCurrent);
 
 			// dont disturb logic above
-			
-			
+
 			try {
-				Date	date3 = new SimpleDateFormat("yyyy-MM-dd").parse(dateCurrent);
-				  System.out.println(date3);  
-				  Date date4 = new SimpleDateFormat("yyyy-MM-dd").parse(t.get(i).getTime());
-				  System.out.println(date4);
-				  long diff = date4.getTime() - date3.getTime();
+				Date date3 = new SimpleDateFormat("yyyy-MM-dd").parse(dateCurrent);
+				System.out.println(date3);
+				Date date4 = new SimpleDateFormat("yyyy-MM-dd").parse(t.get(i).getTime());
+				System.out.println(date4);
+				long diff = date4.getTime() - date3.getTime();
 				System.out.println("Difference in Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
 				String diffString = Long.toString(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-				System.out.println(diffString+" in string");
+				System.out.println(diffString + " in string");
 				t.get(i).setTime(diffString);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}  
-			  
+			}
 
 //			Date date3 = date;
 //			Date date4 = date;
@@ -80,7 +76,6 @@ public class MyController {
 //			long diff = date3.getTime() - date4.getTime();
 //			System.out.println("Difference in Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
 
-			
 //			try editing above 
 //		    LocalDateTime date3 = LocalDate.parse(dateCurrent, dtf);
 //		    LocalDateTime date4 = LocalDate.parse(t.get(i).getTime(), dtf);
@@ -141,9 +136,12 @@ public class MyController {
 	@PutMapping(value = "/complete/{id}")
 	public ResponseEntity<Object> updateStatus(@PathVariable long id, @RequestBody Tasks task) {
 //		userRepo.update(user);
+		System.out.println(task);
 		Tasks updatedTask = tasksRepo.findById(id).get();
+		System.out.println(updatedTask);
 //		updatedTask.setTask(task.getTask());
 		updatedTask.setStatus(false);
+		System.out.println(updatedTask);
 		tasksRepo.save(updatedTask);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

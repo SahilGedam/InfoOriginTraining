@@ -2,37 +2,50 @@
   <div class="upper-part">
     <h3>Task Input Form</h3>
     <div class="parent">
+      <!-- <div class="row"> -->
       <div class="mb-3">
         <form>
-          <div class="text-input">
-            <label for="task">Input Task</label>
-            <input
-              type="text"
-              class="form-control form-control-lg text-white bg-dark"
-              id="task"
-              placeholder="Enter Task"
-              [(ngModel)]="form.task"
-              name="task"
-              #task="ngModel"
-              required
-              [pattern]="taskRegex"
-              maxlength="320"
-              [ngClass]="{ error: task.errors && task.touched && form.task }"
-            />
-            <div
+          <div class="form-row row">
+            <!-- <div class="text-input"> -->
+            <!-- <div class="col"> -->
+            <div class="form-group col-md-4">
+              <label for="task">Input Task</label>
+              <input
+                type="text"
+                class="form-control form-control-lg text-white bg-dark"
+                id="task"
+                placeholder="Enter Task"
+                [(ngModel)]="form.task"
+                name="task"
+                #task="ngModel"
+                required
+                [pattern]="taskRegex"
+                maxlength="320"
+                [ngClass]="{ error: task.errors && task.touched && clicked }"
+              />
+            </div>
+
+            <!-- <div
               *ngIf="task.invalid && task.errors && task.touched && form.task"
             >
               <p class="text-danger">Enter a Valid Task</p>
-            </div>
-          </div>
-          <div class="second-input">
-            <div class="date-input">
-              <div>
-                <label for="date">Input Deadline</label>
-              </div>
+            </div> -->
+            <!-- </div> -->
+            <!-- <div class="second-input"> -->
+            <!-- <div class="col"> -->
+            <!-- <div class="date-input"> -->
+            <!-- <div class="col"> -->
+            <!-- <div> -->
+            <div class="form-group col-md-4">
+              <label for="date">Input Deadline</label>
+              <!-- </div> -->
               <input
                 type="date"
-                [ngClass]="{ error: date.errors && date.touched && form.time }"
+                [ngClass]="{
+                  error:
+                    (date.errors && date.touched && clicked) 
+                  
+                }"
                 required
                 #date="ngModel"
                 [(ngModel)]="form.time"
@@ -43,16 +56,22 @@
                 [min]="currentDate"
               />
             </div>
+            <!-- </div> -->
 
-            <div class="button-div">
-              <!-- [disabled]="
+            <!-- <div class="button-div"> -->
+            <!-- <div class="col"> -->
+            <!-- [disabled]="
                 !form.task || !form.time || validateDate() || task.invalid
               " -->
+            <div class="form-group col-md-4 btn-div">
               <button class="btn btn-primary" (click)="registerFn()">
                 submit
               </button>
               <button class="btn btn-danger" (click)="clearFn()">clear</button>
             </div>
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
           </div>
         </form>
       </div>
@@ -77,10 +96,8 @@
           <tr
             *ngFor="let tasks of taskList; let i = index"
             [ngClass]="[
-              !tasks.status && tasks.time < currentDate
-                ? 'not-completed-task'
-                : '',
-              !tasks.status && tasks.time > currentDate ? 'completed-task' : '',
+              !tasks.status && tasks.time < 0 ? 'not-completed-task' : '',
+              !tasks.status && tasks.time > 0 ? 'completed-task' : '',
               tasks.time == 0 ? 'last-day' : ''
             ]"
           >
@@ -91,15 +108,9 @@
             <th>{{ tasks.id }}</th>
             <!-- <th>{{ tasks.id }}</th> -->
             <!-- <th>{{ tasks.status }}</th> -->
-            <th *ngIf="!tasks.status && tasks.time < currentDate">
-              Task Expired
-            </th>
+            <th *ngIf="!tasks.status && tasks.time < 0">Task Expired</th>
 
-            <th
-              *ngIf="
-                tasks.status || (!tasks.status && tasks.time > currentDate)
-              "
-            >
+            <th *ngIf="tasks.status || (!tasks.status && tasks.time > 0)">
               {{ tasks.time }} Days
             </th>
             <th

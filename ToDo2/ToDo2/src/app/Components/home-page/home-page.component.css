@@ -14,19 +14,15 @@ table {
 .second-input {
   display: flex;
 }
-.button-div {
-  width: 40%;
+.btn-div {
+  /* width: 40%; */
   margin-top: 20px;
-  /* float: right; */
 }
-/* #date {
- 
-} */
+
 .date-input {
   width: 40%;
 }
 .completed-task th {
-  /* border: 1px solid green; */
   color: green;
 }
 .not-completed-task th {
@@ -54,3 +50,6 @@ button:disabled {
 .lower-part {
   margin-top: 20px;
 }
+/* .row{
+    display : flex;
+} */
