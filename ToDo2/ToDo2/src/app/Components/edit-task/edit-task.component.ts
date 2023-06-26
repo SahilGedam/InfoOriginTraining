@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataServiceService } from 'src/app/services/data-service.service';
 
@@ -11,23 +11,33 @@ export class EditTaskComponent {
   taskRegex = /^.*[a-zA-Z].*$/;
   taskId: any;
   previousTask: any = '';
-  time: any;
-  status: any;
-  data: any;
+  displayMessage: string = '';
+    // bootstrap class for input
+    bootStrapClass = '';
+
+  form = {
+    task: '',
+  };
   constructor(
     private dataservice: DataServiceService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.time = this.activatedRoute.snapshot.paramMap.get('time');
     this.taskId = this.activatedRoute.snapshot.paramMap.get('id');
     this.previousTask = this.activatedRoute.snapshot.paramMap.get('task');
     this.form.task = this.previousTask;
   }
-  form = {
-    task: '',
-  };
+    //inject bootstrap classes in the view
+    @HostListener('window:change') darkModeToggle() {
+      if (!this.dataservice.colorMode) {
+        this.bootStrapClass = '';
+       
+      } else if (this.dataservice.colorMode) {
+        this.bootStrapClass = 'text-white bg-dark';
+       
+      }
+    }
 
   //validate input
   validateInput() {
@@ -38,37 +48,29 @@ export class EditTaskComponent {
     }
   }
   registerFn() {
-    console.log(this.taskId);
     let validForm = this.validateInput();
     if (validForm) {
-    // let taskSent = {
-    //   task: this.form.task,
-    // };
-    let taskSent = {
-      id: this.taskId,
-      task: this.form.task,
-      time: this.time,
-      status: true,
-    };
-    console.log(this.form.task);
-    console.log('in edit component');
+      let taskSent = {
+        id: this.taskId,
+        task: this.form.task,
+      };
 
-    this.dataservice.updateData(this.taskId, taskSent).subscribe(
-      (data) => {
-        console.log(data);
-
-        this.router.navigate(['']);
-      },
-      (error) => {
-        console.log(error);
-        // alert("duplicate entries not allowed")
-      }
-    );
-  } else {
-    alert('enter proper input');
-  }
+      this.dataservice.updateData(this.taskId, taskSent).subscribe(
+        (data) => {
+          this.router.navigate(['']);
+        },
+        (error) => {
+          // alert('duplicate entries not allowed');
+          this.displayMessage='duplicate entries not allowed'
+        }
+      );
+    } else {
+      this.displayMessage='enter proper input'
+      // alert('enter proper input');
+    }
   }
   clearFn() {
     this.form.task = '';
+    this.displayMessage='';
   }
 }

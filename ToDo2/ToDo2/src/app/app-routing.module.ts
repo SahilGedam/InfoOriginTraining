@@ -14,7 +14,7 @@ const routes: Routes = [
     component: HomePageComponent,
   },
   {
-    path: 'edit/:id/:task/:time',
+    path: 'edit/:id/:task',
     component: EditTaskComponent,
   },
 ];

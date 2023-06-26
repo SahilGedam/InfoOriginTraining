@@ -5,8 +5,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class DataServiceService {
-
   constructor(private http: HttpClient) {}
+
+  colorMode: boolean = false;
+  // for adding bootstrap classes
+  toggleColorMode() {
+    this.colorMode = !this.colorMode;
+  }
 
   //get data get
   url = 'http://localhost:8080/';
@@ -20,11 +25,11 @@ export class DataServiceService {
   }
   // save data
   saveData(data: any) {
-    return this.http.post('http://localhost:8080/save', data);
+    return this.http.post(`${this.url}save`, data);
   }
   // delete
   deleteData(data: any) {
-    return this.http.delete(`http://localhost:8080/delete/${data}`);
+    return this.http.delete(`${this.url}delete/${data}`);
   }
   //completeTask
   completeTask(taskId: any, data: any) {

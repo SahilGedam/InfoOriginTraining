@@ -1,5 +1,5 @@
 <div class="container">
-  <h3>Edit Task</h3>
+  <h3>Update Task</h3>
 
   <div class="parent">
     <div class="mb-3">
@@ -8,7 +8,7 @@
         <input
           type="text"
           rows="3"
-          class="form-control text-white bg-dark"
+          class="form-control {{bootStrapClass}}"
           id="task"
           placeholder="Enter Task"
           [(ngModel)]="form.task"
@@ -37,4 +37,8 @@
       <button class="btn btn-danger" (click)="clearFn()">clear</button>
     </div>
   </div>
+  <div *ngIf="displayMessage">
+    <p>{{displayMessage}}</p>
+  </div>
 </div>
+

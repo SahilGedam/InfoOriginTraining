@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DarkModeService } from 'angular-dark-mode';
+import { Observable } from 'rxjs';
 import { DataServiceService } from 'src/app/services/data-service.service';
 
 @Component({
@@ -12,6 +14,24 @@ export class HomePageComponent implements OnInit {
   taskList: any;
   //regex
   taskRegex = /^.*[a-zA-Z].*$/;
+  //validating Date
+  validDate: any;
+  // to check if submit is clicked
+  clickedSubmit: any;
+
+  currentDate = new Date().toISOString().split('T')[0];
+
+  displayMessage: string = '';
+  // bootstrap class for input
+  bootStrapClass = '';
+  // bootstrap class for table
+  bootStrapTableClass = '';
+
+  // task Form
+  form = {
+    task: '',
+    time: '',
+  };
   constructor(
     private dataservice: DataServiceService,
     private router: Router
@@ -20,45 +40,54 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.getTaskList();
     this.form.time = new Date().toISOString().split('T')[0];
+    this.darkModeToggle();
   }
-  form = {
-    task: '',
-    time: '',
-  };
 
-  currentDate = new Date().toISOString().split('T')[0];
+
+  //inject bootstrap classes in the view
+  @HostListener('window:change') darkModeToggle() {
+    if (!this.dataservice.colorMode) {
+      this.bootStrapClass = '';
+      this.bootStrapTableClass = '';
+    } else if (this.dataservice.colorMode) {
+      this.bootStrapClass = 'text-white bg-dark';
+      this.bootStrapTableClass = 'table-dark';
+    }
+  }
 
   // functions of Input Box
-  //validate input
-  validDate:any;
-  clicked:any;
+  // check all validations
   validateInput() {
-   
-    console.log("validate input is called");
-    
     if (
       this.form.task != '' &&
       this.form.time != '' &&
       !this.validDate &&
       /[a-zA-Z]/.test(this.form.task)
     ) {
-      console.log(this.form.task);
-      console.log(this.form.time);
-      console.log(this.validateDate());
-      
-      
-      
       return true;
     } else {
       return false;
     }
   }
+  // validate Date
+  validateDate() {
+    if (
+      this.form.time >= this.currentDate
+      // || this.form.time === this.currentDate
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  // register Task to TaskService
   registerFn() {
-    this.clicked=true;
-    console.log(this.form);
-    console.log(this.form.time, 'time');
+    this.clickedSubmit = true;
+
     // check if inputs are valid
-    this.validDate=this.validateDate();
+    // validate date
+    this.validDate = this.validateDate();
+    // validate task input and date
     let validForm = this.validateInput();
 
     if (validForm) {
@@ -67,112 +96,72 @@ export class HomePageComponent implements OnInit {
         time: this.form.time,
         status: true,
       };
-      console.log(this.form.task);
+
       this.dataservice.saveData(taskSent).subscribe(
         (data) => {
           this.getTaskList();
-          console.log(data);
-          console.log('data entered successfully');
-          alert('Task entered successfully');
+          this.displayMessage = 'Task Entered Successfully';
+
+          // alert('Task entered successfully');
         },
         (error) => {
-          alert('duplicate Tasks not allowed');
-          console.log('called from error');
-
-          console.log(error);
+          // alert('duplicate Tasks not allowed');
+          this.displayMessage = 'Duplicate Tasks not allowed';
         }
       );
-      console.log('code reachable ata line 88');
-      // this.getTaskList();
     } else {
-      alert('enter proper input');
+      this.displayMessage = 'Enter Proper Input';
+      // alert('enter proper input');
     }
   }
   // clear the input box
   clearFn() {
     this.form.task = '';
-    this.clicked=false;
+    this.clickedSubmit = false;
     this.form.time = this.currentDate;
-  }
-  validateDate() {
-    if (this.form.time >= this.currentDate || this.form.time===this.currentDate) {
-      console.log('date validated');
-      return false;
-      
-    } else {
-      return true;
-    }
+    this.displayMessage = '';
   }
 
   // input box ends above
+
   // dashboard code below
-  // function to fetch tasks
-
-  // styleTable = '';
-
-  // checkExpired(date: any) {
-  //   if (date <= this.currentDate) {
-  //     // return true;
-  //     this.styleTable = 'expired';
-  //   } else {
-  //     this.styleTable = '';
-  //     // return false;
-  //   }
-  // }
 
   // fetch all tasks
   getTaskList() {
     this.dataservice.getData().subscribe((data) => {
       this.taskList = data;
-      console.log(data);
     });
-
-    console.log(this.taskList, 'task list');
   }
   // update if task is completed
   completeTask(data: any) {
-    console.log(data);
     let taskSent = {
       id: data.id,
-      task: data.task,
+
       status: false,
     };
-    console.log(taskSent);
 
-    this.dataservice.completeTask(data.id, taskSent).subscribe((data) => {
-      this.getTaskList();
-      console.log(data);
-    });
-  }
-  //route to update task
-  updateTask(data1: any, data2: any, data3: any): void {
-    console.log('updateTask');
-
-    this.router.navigate([`/edit/${data1}/${data2}/${data3}`]);
-  }
-  //delete task
-  deleteTask(data: any): void {
-    // this.getTaskList();
-    console.log(data);
-
-    this.dataservice.deleteData(data).subscribe(
-      (data: any) => {
-        console.log('code reached without error in deleteData');
-
+    this.dataservice.completeTask(data.id, taskSent).subscribe(
+      (data) => {
         this.getTaskList();
-        console.log(data);
       },
       (error) => {
-        console.log('error while deleting');
-
-        console.log(error);
         this.getTaskList();
       }
     );
-    console.log('deleteTask');
-    console.log(data);
-    console.log('code reached at line 54');
-
-    // this.getTaskList();
+  }
+  //route to update task
+  updateTask(data1: any, data2: any): void {
+    this.router.navigate([`/edit/${data1}/${data2}`]);
+  }
+  //delete task
+  deleteTask(data: any): void {
+    this.dataservice.deleteData(data).subscribe(
+      (data: any) => {
+        this.getTaskList();
+      },
+      (error) => {
+        this.getTaskList();
+      }
+    );
   }
 }

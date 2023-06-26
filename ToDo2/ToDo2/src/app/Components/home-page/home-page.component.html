@@ -1,18 +1,17 @@
+
 <div class="container">
   <div class="upper-part">
-    <h3>Task Input Form</h3>
+    <h3>Task Input</h3>
     <div class="parent">
-      <!-- <div class="row"> -->
       <div class="mb-3">
         <form>
           <div class="form-row row">
-            <!-- <div class="text-input"> -->
-            <!-- <div class="col"> -->
             <div class="form-group col-md-4">
               <label for="task">Input Task</label>
+              <!-- class="form-control form-control-lg text-white bg-dark" -->
               <input
                 type="text"
-                class="form-control form-control-lg text-white bg-dark"
+                class="form-control form-control-lg {{bootStrapClass}} "
                 id="task"
                 placeholder="Enter Task"
                 [(ngModel)]="form.task"
@@ -21,71 +20,52 @@
                 required
                 [pattern]="taskRegex"
                 maxlength="320"
-                [ngClass]="{ error: task.errors && task.touched && clicked }"
+                [ngClass]="{ error: task.errors && task.touched && clickedSubmit }"
               />
             </div>
 
-            <!-- <div
-              *ngIf="task.invalid && task.errors && task.touched && form.task"
-            >
-              <p class="text-danger">Enter a Valid Task</p>
-            </div> -->
-            <!-- </div> -->
-            <!-- <div class="second-input"> -->
-            <!-- <div class="col"> -->
-            <!-- <div class="date-input"> -->
-            <!-- <div class="col"> -->
-            <!-- <div> -->
             <div class="form-group col-md-4">
               <label for="date">Input Deadline</label>
-              <!-- </div> -->
+
               <input
                 type="date"
                 [ngClass]="{
-                  error:
-                    (date.errors && date.touched && clicked) 
-                  
+                  error: date.errors && date.touched && clickedSubmit
                 }"
                 required
                 #date="ngModel"
                 [(ngModel)]="form.time"
-                class="form-control form-control-lg text-white bg-dark"
+                class="form-control form-control-lg {{bootStrapClass}}"
                 placeholder="Enter Date"
                 name="date"
                 id="date"
                 [min]="currentDate"
               />
             </div>
-            <!-- </div> -->
 
-            <!-- <div class="button-div"> -->
-            <!-- <div class="col"> -->
-            <!-- [disabled]="
-                !form.task || !form.time || validateDate() || task.invalid
-              " -->
             <div class="form-group col-md-4 btn-div">
               <button class="btn btn-primary" (click)="registerFn()">
                 submit
               </button>
               <button class="btn btn-danger" (click)="clearFn()">clear</button>
             </div>
-            <!-- </div> -->
-            <!-- </div> -->
-            <!-- </div> -->
           </div>
         </form>
       </div>
     </div>
   </div>
-  <!-- input box  inserted above  -->
+  <div *ngIf="displayMessage">
+    <p>{{displayMessage}}</p>
+  </div>
+<!-- input box ends above  -->
   <div class="lower-part">
     <h3>Task List</h3>
     <div class="table-responsive">
-      <table class="table table-responsive table-striped table-dark">
+      <!-- <table class="table table-responsive table-striped table-dark"> -->
+      <table class="table table-responsive table-striped {{bootStrapTableClass}}">
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <!-- <th scope="col">status</th> -->
 
             <th scope="col">Expires in</th>
             <th scope="col">Task</th>
@@ -97,22 +77,16 @@
             *ngFor="let tasks of taskList; let i = index"
             [ngClass]="[
               !tasks.status && tasks.time < 0 ? 'not-completed-task' : '',
-              !tasks.status && tasks.time > 0 ? 'completed-task' : '',
-              tasks.time == 0 ? 'last-day' : ''
+              !tasks.status && tasks.time >= 0 ? 'completed-task' : '',
+              tasks.status && tasks.time == 0 ? 'last-day' : ''
             ]"
           >
-            <!-- [ngClass]="!tasks.status ? 'completed-task' : ''" -->
-            <!-- <section [ngClass]="[menu1 ? 'class1' : '',  menu2 ? 'class1' : '', (something && (menu1 || menu2)) ? 'class2' : '']"></section> -->
-            <!-- [ngStyle]="{border: !tasks.status }" -->
-            <!-- <button [ngStyle]="{ color: colorName === 'red' ? 'red' : 'green' }" >click</button> -->
-            <th>{{ tasks.id }}</th>
+            <th>{{ i + 1 }}</th>
             <!-- <th>{{ tasks.id }}</th> -->
-            <!-- <th>{{ tasks.status }}</th> -->
-            <th *ngIf="!tasks.status && tasks.time < 0">Task Expired</th>
 
-            <th *ngIf="tasks.status || (!tasks.status && tasks.time > 0)">
-              {{ tasks.time }} Days
-            </th>
+            <th *ngIf="tasks.time < 0">Task Expired</th>
+
+            <th *ngIf="tasks.time > -1">{{ tasks.time }} Days</th>
             <th
               style="word-wrap: break-word; min-width: 650px; max-width: 650px"
             >
@@ -123,7 +97,7 @@
                 <button
                   class="btn btn-primary"
                   [disabled]="!tasks.status"
-                  (click)="updateTask(tasks.id, tasks.task, tasks.time)"
+                  (click)="updateTask(tasks.id, tasks.task)"
                 >
                   update
                 </button>

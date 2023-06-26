@@ -6,6 +6,19 @@
 
 body{
     font-family: 'Ubuntu', sans-serif;
-    background-color: #000000;
+
     overflow-x: hidden;
 }
+
+
+body.dark-theme{
+  background-color: #2d3436;
+  color: #dfe6e9;
+}
+body.light-theme {
+  background-color: #dfe6e9;
+  color: #2d3436;
+}
+
+
+

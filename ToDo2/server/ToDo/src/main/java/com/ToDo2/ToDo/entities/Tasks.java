@@ -14,10 +14,9 @@ public class Tasks {
 	private String task;
 	@Column
 	private Boolean status;
-	@Column
+	@Column(name = "expire_time")
 	private String time;
-//	@Column
-//	private long remainingTime;
+
 	@Override
 	public String toString() {
 		return "Tasks [id=" + id + ", task=" + task + ", status=" + status + ", time=" + time + "]";
@@ -57,11 +56,6 @@ public class Tasks {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-//	public long getRemainingTime() {
-//		return remainingTime;
-//	}
-//	public void setRemainingTime(long remainingTime) {
-//		this.remainingTime = remainingTime;
-//	}
+
 
 }

@@ -1,26 +1,10 @@
+/* general css  */
 button {
   margin: 8px;
   padding: 8px;
 }
-table {
-  width: 100%;
-}
-.dashboard-container {
-  width: 100%;
-  border: 1px solid red;
-}
-
-/* input box css  */
-.second-input {
-  display: flex;
-}
-.btn-div {
-  /* width: 40%; */
+.lower-part {
   margin-top: 20px;
-}
-
-.date-input {
-  width: 40%;
 }
 .completed-task th {
   color: green;
@@ -29,15 +13,14 @@ table {
   color: red;
 }
 .last-day th {
-  color: yellow;
+  color: #ffc107;
 }
-
-h3 {
-  color: #ffffff;
+/* h3 {
+  color: #c8efc8;
 }
 label {
   color: #ffffff;
-}
+} */
 .container {
   margin-top: 30px;
 }
@@ -47,9 +30,32 @@ label {
 button:disabled {
   background-color: grey;
 }
-.lower-part {
+
+/* input box css  */
+.second-input {
+  display: flex;
+}
+.btn-div {
   margin-top: 20px;
 }
-/* .row{
-    display : flex;
+
+.date-input {
+  width: 40%;
+}
+
+/* dashboard css  */
+table {
+  width: 100%;
+}
+.dashboard-container {
+  width: 100%;
+  border: 1px solid red;
+}
+th {
+  text-align: center;
+}
+/* table.light-mode {
+  color: pink;
 } */
+
+
