@@ -43,7 +43,6 @@ export class HomePageComponent implements OnInit {
     this.darkModeToggle();
   }
 
-
   //inject bootstrap classes in the view
   @HostListener('window:change') darkModeToggle() {
     if (!this.dataservice.colorMode) {
@@ -71,10 +70,7 @@ export class HomePageComponent implements OnInit {
   }
   // validate Date
   validateDate() {
-    if (
-      this.form.time >= this.currentDate
-      // || this.form.time === this.currentDate
-    ) {
+    if (this.form.time >= this.currentDate) {
       return false;
     } else {
       return true;
@@ -101,17 +97,13 @@ export class HomePageComponent implements OnInit {
         (data) => {
           this.getTaskList();
           this.displayMessage = 'Task Entered Successfully';
-
-          // alert('Task entered successfully');
         },
         (error) => {
-          // alert('duplicate Tasks not allowed');
           this.displayMessage = 'Duplicate Tasks not allowed';
         }
       );
     } else {
       this.displayMessage = 'Enter Proper Input';
-      // alert('enter proper input');
     }
   }
   // clear the input box
@@ -134,13 +126,7 @@ export class HomePageComponent implements OnInit {
   }
   // update if task is completed
   completeTask(data: any) {
-    let taskSent = {
-      id: data.id,
-
-      status: false,
-    };
-
-    this.dataservice.completeTask(data.id, taskSent).subscribe(
+    this.dataservice.completeTask(data.id).subscribe(
       (data) => {
         this.getTaskList();
       },

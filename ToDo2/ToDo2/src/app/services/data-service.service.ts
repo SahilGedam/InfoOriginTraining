@@ -32,7 +32,7 @@ export class DataServiceService {
     return this.http.delete(`${this.url}delete/${data}`);
   }
   //completeTask
-  completeTask(taskId: any, data: any) {
-    return this.http.put(`${this.url}complete/${taskId}`, data);
+  completeTask(taskId: any) {
+    return this.http.put(`${this.url}complete/${taskId}`,null);
   }
 }

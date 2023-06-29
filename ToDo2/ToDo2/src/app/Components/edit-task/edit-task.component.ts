@@ -12,8 +12,8 @@ export class EditTaskComponent {
   taskId: any;
   previousTask: any = '';
   displayMessage: string = '';
-    // bootstrap class for input
-    bootStrapClass = '';
+  // bootstrap class for input
+  bootStrapClass = '';
 
   form = {
     task: '',
@@ -27,17 +27,16 @@ export class EditTaskComponent {
     this.taskId = this.activatedRoute.snapshot.paramMap.get('id');
     this.previousTask = this.activatedRoute.snapshot.paramMap.get('task');
     this.form.task = this.previousTask;
+    this.darkModeToggle();
   }
-    //inject bootstrap classes in the view
-    @HostListener('window:change') darkModeToggle() {
-      if (!this.dataservice.colorMode) {
-        this.bootStrapClass = '';
-       
-      } else if (this.dataservice.colorMode) {
-        this.bootStrapClass = 'text-white bg-dark';
-       
-      }
+  //inject bootstrap classes in the view
+  @HostListener('window:change') darkModeToggle() {
+    if (!this.dataservice.colorMode) {
+      this.bootStrapClass = '';
+    } else if (this.dataservice.colorMode) {
+      this.bootStrapClass = 'text-white bg-dark';
     }
+  }
 
   //validate input
   validateInput() {
@@ -60,17 +59,15 @@ export class EditTaskComponent {
           this.router.navigate(['']);
         },
         (error) => {
-          // alert('duplicate entries not allowed');
-          this.displayMessage='duplicate entries not allowed'
+          this.displayMessage = 'duplicate entries not allowed';
         }
       );
     } else {
-      this.displayMessage='enter proper input'
-      // alert('enter proper input');
+      this.displayMessage = 'enter proper input';
     }
   }
   clearFn() {
     this.form.task = '';
-    this.displayMessage='';
+    this.displayMessage = '';
   }
 }
