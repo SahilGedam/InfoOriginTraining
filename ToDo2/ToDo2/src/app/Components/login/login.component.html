@@ -1,0 +1,90 @@
+<div class="container">
+  <h3>Login User</h3>
+  <!-- <h3>
+    {{displayMessage}}
+  </h3> -->
+  <div class="mt-4">
+    <form #register="ngForm" (ngSubmit)=" registerFn()">
+      <div class="mb-3">
+        <label for="username" class="form-label">User Name</label>
+
+        <input
+          type="text"
+          class="form-control {{ bootStrapClass }}"
+          id="username"
+          [(ngModel)]="form.username"
+          name="username"
+          #username="ngModel"
+          required
+          maxlength="32"
+          [ngClass]="{
+            error:
+              (username.errors && username.touched) ||
+              (!validInput && clickedSubmit && form.username == '')
+          }"
+        />
+
+        <div *ngIf="username.errors && username.touched">
+          <small class="text-danger" *ngIf="username.errors['required']"
+            >User Name field is requird</small
+          >
+
+          <small class="text-danger" *ngIf="username.errors['maxlength']"
+            >Only 32 characters are allowed.</small
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">password</label>
+
+        <input
+          type="password"
+          class="form-control {{ bootStrapClass }}"
+          id="password"
+          [(ngModel)]="form.password"
+          name="password"
+          #password="ngModel"
+          required
+          maxlength="32"
+          [pattern]="passwordRegex"
+          [ngClass]="{
+            error:
+              (password.errors && password.touched) ||
+              (!validInput && clickedSubmit && form.password == '')
+          }"
+        />
+        <div *ngIf="password.errors && password.touched">
+          <small class="text-danger" *ngIf="password.errors['required']"
+            >password field is requird</small
+          >
+
+          <small class="text-danger" *ngIf="password.errors['maxlength']"
+            >password should be maximum 32 characters long.</small
+          >
+          <small class="text-danger" *ngIf="password.errors['pattern']"
+            >Password must be minimum 8 characters long with atleast 1
+            uppercase, 1 lowercase , 1 number and 1 special symbol</small
+          >
+        </div>
+      </div>
+      <div *ngIf="displayMessage">
+        <small class="text-danger"> {{ displayMessage }} </small>
+      </div>
+      <div class="mb-3 btn-div">
+        <div class="btn1">
+          <button #submit class="btn btn-success" type="submit">Submit</button>
+        </div>
+        <div class="btn2">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="navigateSignUp()"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="mb-3"></div>
+</div>

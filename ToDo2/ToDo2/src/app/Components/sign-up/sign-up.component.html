@@ -1,0 +1,269 @@
+<div class="container">
+  <h3>Sign Up new user</h3>
+
+  <div class="mt-4">
+    <div class="form-div">
+      <form #register="ngForm" (ngSubmit)="registerFn()">
+        <div class="mb-3">
+          <label for="fname" class="form-label">First Name</label>
+
+          <input
+            type="text"
+            class="form-control {{ bootStrapClass }}"
+            id="fname"
+            [(ngModel)]="form.fname"
+            name="fname"
+            #fname="ngModel"
+            (change)="getUserNameSuggestion()"
+            required
+            [pattern]="lettersRegex"
+            maxlength="32"
+            [ngClass]="{
+              error:
+                (fname.errors && fname.touched) ||
+                (!validInput && clickedSubmit && form.fname == '')
+            }"
+          />
+
+          <div *ngIf="fname.errors && fname.touched">
+            <small class="text-danger" *ngIf="fname.errors['required']"
+              >First Name field is requird</small
+            >
+
+            <small class="text-danger" *ngIf="fname.errors['maxlength']"
+              >Only 32 characters are allowed.</small
+            >
+            <small class="text-danger" *ngIf="fname.errors['pattern']"
+              >Enter a valid name</small
+            >
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="lname" class="form-label">Last Name</label>
+
+          <input
+            type="text"
+            class="form-control {{ bootStrapClass }}"
+            id="lname"
+            [(ngModel)]="form.lname"
+            name="lname"
+            #lname="ngModel"
+            required
+            [pattern]="lettersRegex"
+            maxlength="32"
+            (change)="getUserNameSuggestion()"
+            [ngClass]="{
+              error:
+                (lname.errors && lname.touched) ||
+                (!validInput && clickedSubmit && form.lname == '')
+            }"
+          />
+
+          <div *ngIf="lname.errors && lname.touched">
+            <small class="text-danger" *ngIf="lname.errors['required']"
+              >Last Name field is requird</small
+            >
+
+            <small class="text-danger" *ngIf="lname.errors['maxlength']"
+              >Only 32 characters are allowed.</small
+            >
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+
+          <input
+            type="email"
+            class="form-control {{ bootStrapClass }}"
+            id="email"
+            [(ngModel)]="form.email"
+            name="email"
+            #email="ngModel"
+            required
+            maxlength="32"
+            [pattern]="emailRegex"
+            [ngClass]="{
+              error:
+                (email.errors && email.touched) ||
+                (!validInput && clickedSubmit && form.email == '')
+            }"
+          />
+          <div *ngIf="email.errors && email.touched">
+            <small class="text-danger" *ngIf="email.errors['required']"
+              >Email field is requird</small
+            >
+
+            <small class="text-danger" *ngIf="email.errors['maxlength']"
+              >Email should be maximum 32 characters long.</small
+            >
+            <small class="text-danger" *ngIf="email.errors['pattern']"
+              >Please enter a valid email.</small
+            >
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="username" class="form-label">User Name</label>
+
+            <input
+              type="text"
+              class="form-control {{ bootStrapClass }} user-name-input"
+              id="username"
+              [(ngModel)]="form.username"
+              name="username"
+              #username="ngModel"
+              required
+              maxlength="32"
+              (change)="checkAvailable()"
+              [ngClass]="{
+                error:
+                  (username.errors && username.touched) ||
+                  (!validInput && clickedSubmit && form.username == '')
+              }"
+            />
+            <div
+              *ngIf="
+                !availableUserName && form.username != '' && username.touched
+              "
+            >
+              <small class="text-danger">User Name is Not Available</small>
+            </div>
+
+            <div *ngIf="username.errors && username.touched">
+              <small class="text-danger" *ngIf="username.errors['required']"
+                >User Name field is requird</small
+              >
+
+              <small class="text-danger" *ngIf="username.errors['maxlength']"
+                >Only 32 characters are allowed.</small
+              >
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="userSelect" class="form-label"
+              >UserName Suggestion</label
+            >
+            <select
+              #userNameSelect
+              class="form-control {{ bootStrapClass }} user-name-input"
+              (change)="selectUserNameButton(userNameSelect.value)"
+              (change)="checkAvailable()"
+              name="selectedUserName"
+              id="userSelect"
+            >
+              <option value="">Suggestions</option>
+              <option
+                #valueOption
+                *ngFor="let userNameSugg of suggestedUserName"
+                [value]="userNameSugg"
+              >
+                {{ userNameSugg }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+
+          <input
+            type="password"
+            class="form-control {{ bootStrapClass }}"
+            id="password"
+            [(ngModel)]="form.password"
+            name="password"
+            #password="ngModel"
+            required
+            maxlength="32"
+            [pattern]="passwordRegex"
+            [ngClass]="{
+              error:
+                (password.errors && password.touched) ||
+                (!validInput && clickedSubmit && form.password == '')
+            }"
+          />
+          <div *ngIf="password.errors && password.touched">
+            <small class="text-danger" *ngIf="password.errors['required']"
+              >Password field is requird</small
+            >
+
+            <small class="text-danger" *ngIf="password.errors['maxlength']"
+              >password should be maximum 32 characters long.</small
+            >
+            <small class="text-danger" *ngIf="password.errors['pattern']"
+              >Password must be minimum 8 characters long with atleast 1
+              uppercase, 1 lowercase , 1 number and 1 special symbol</small
+            >
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="repassword" class="form-label">Confirm Password</label>
+
+          <input
+            type="password"
+            class="form-control {{ bootStrapClass }}"
+            id="repassword"
+            [(ngModel)]="form.repassword"
+            name="repassword"
+            #repassword="ngModel"
+            required
+            maxlength="32"
+            [pattern]="passwordRegex"
+            [ngClass]="{
+              error:
+                (repassword.errors && repassword.touched) ||
+                (!validInput && clickedSubmit && form.repassword == '') ||
+                (clickedSubmit && !validatedConfirmPassword())
+            }"
+          />
+          <div *ngIf="repassword.errors && repassword.touched">
+            <small class="text-danger" *ngIf="repassword.errors['required']"
+              >password field is requird</small
+            >
+
+            <small class="text-danger" *ngIf="repassword.errors['maxlength']"
+              >password should be maximum 32 characters long.</small
+            >
+            <small class="text-danger" *ngIf="repassword.errors['pattern']"
+              >Password must be minimum 8 characters long with atleast 1
+              uppercase, 1 lowercase , 1 number and 1 special symbol</small
+            >
+          </div>
+          <div
+            *ngIf="
+              form.repassword != '' &&
+              repassword.touched &&
+              password.touched &&
+              !validatedConfirmPassword()
+            "
+          >
+            <small class="text-danger">password does not match</small>
+          </div>
+        </div>
+        <div *ngIf="displayMessage">
+          <p class="text-danger">
+            {{ displayMessage }}
+          </p>
+        </div>
+
+        <div class="mb-3 btn-div">
+          <div class="btn1">
+            <button #submit class="btn btn-success" type="submit">
+              Submit
+            </button>
+          </div>
+          <div class="btn2">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              (click)="navigatelogin()"
+            >
+              login
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

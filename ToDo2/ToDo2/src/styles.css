@@ -9,6 +9,11 @@ body{
 
     overflow-x: hidden;
 }
+.error {
+
+  border: 1px solid red;
+
+}
 
 
 body.dark-theme{

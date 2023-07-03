@@ -26,6 +26,9 @@ export class HomePageComponent implements OnInit {
   bootStrapClass = '';
   // bootstrap class for table
   bootStrapTableClass = '';
+  userName: string = '';
+  userId: number = 0;
+  userDetails: any;
 
   // task Form
   form = {
@@ -38,6 +41,7 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getUserName();
     this.getTaskList();
     this.form.time = new Date().toISOString().split('T')[0];
     this.darkModeToggle();
@@ -52,6 +56,20 @@ export class HomePageComponent implements OnInit {
       this.bootStrapClass = 'text-white bg-dark';
       this.bootStrapTableClass = 'table-dark';
     }
+  }
+
+  getUserName() {
+    this.userDetails = localStorage.getItem('userDetails');
+    this.userDetails = JSON.parse(this.userDetails);
+ 
+    this.userId = this.userDetails.userId;
+    this.userName = this.userDetails.userName;
+ 
+  }
+  logout() {
+  
+    localStorage.setItem('userDetails', JSON.stringify(null))
+    this.router.navigate(['/login']);
   }
 
   // functions of Input Box
@@ -91,15 +109,18 @@ export class HomePageComponent implements OnInit {
         task: this.form.task,
         time: this.form.time,
         status: true,
+        userId: this.userId,
       };
 
       this.dataservice.saveData(taskSent).subscribe(
         (data) => {
           this.getTaskList();
           this.displayMessage = 'Task Entered Successfully';
+          console.log(data);
         },
         (error) => {
           this.displayMessage = 'Duplicate Tasks not allowed';
+          console.log(error);
         }
       );
     } else {
@@ -120,9 +141,10 @@ export class HomePageComponent implements OnInit {
 
   // fetch all tasks
   getTaskList() {
-    this.dataservice.getData().subscribe((data) => {
+    this.dataservice.getTasksById(this.userId).subscribe((data) => {
       this.taskList = data;
     });
+ 
   }
   // update if task is completed
   completeTask(data: any) {

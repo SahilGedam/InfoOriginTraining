@@ -56,7 +56,7 @@ export class EditTaskComponent {
 
       this.dataservice.updateData(this.taskId, taskSent).subscribe(
         (data) => {
-          this.router.navigate(['']);
+          this.router.navigate(['home']);
         },
         (error) => {
           this.displayMessage = 'duplicate entries not allowed';

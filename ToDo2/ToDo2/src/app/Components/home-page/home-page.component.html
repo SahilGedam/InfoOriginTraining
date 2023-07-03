@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="upper-part">
-    <h3>Task Input</h3>
+    <h3>{{userName}}</h3>
     <div class="parent">
       <div class="mb-3">
         <form>
@@ -48,6 +48,7 @@
                 submit
               </button>
               <button class="btn btn-danger" (click)="clearFn()">clear</button>
+              <button class="btn btn-danger logout-btn" (click)="logout()">logout</button>
             </div>
           </div>
         </form>
