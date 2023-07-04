@@ -17,13 +17,39 @@ public class Tasks {
 	private String time;
 	@Column(name = "user_id")
 	private long userId;
-
+	@Column(name = "partner_id")
+	private long partnerId;
+	
 	public long getUserId() {
 		return userId;
 	}
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public Tasks(long id, String task, Boolean status, String time, long userId, long partnerId) {
+		super();
+		this.id = id;
+		this.task = task;
+		this.status = status;
+		this.time = time;
+		this.userId = userId;
+		this.partnerId = partnerId;
+	}
+
+	@Override
+	public String toString() {
+		return "Tasks [id=" + id + ", task=" + task + ", status=" + status + ", time=" + time + ", userId=" + userId
+				+ ", partnerId=" + partnerId + "]";
+	}
+
+	public long getPartnerId() {
+		return partnerId;
+	}
+
+	public void setPartnerId(long partnerId) {
+		this.partnerId = partnerId;
 	}
 
 	public long getId() {
@@ -60,20 +86,9 @@ public class Tasks {
 
 	
 
-	public Tasks(long id, String task, Boolean status, String time, long userId) {
-		super();
-		this.id = id;
-		this.task = task;
-		this.status = status;
-		this.time = time;
-		this.userId = userId;
-	}
 
-	@Override
-	public String toString() {
-		return "Tasks [id=" + id + ", task=" + task + ", status=" + status + ", time=" + time + ", userId=" + userId
-				+ "]";
-	}
+
+	
 
 	public Tasks() {
 		super();

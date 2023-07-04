@@ -12,5 +12,6 @@ public interface TasksRepo extends JpaRepository <Tasks,Long> {
 	@Query("SELECT taskList FROM Tasks taskList WHERE taskList.userId = :user_id")
 	public List<Tasks> getAllTasksByUserId(long user_id);
 		
-	
+	@Query("SELECT taskList FROM Tasks taskList WHERE taskList.partnerId = :user_id")
+	public List<Tasks> getAllTasksByPartnerId(long user_id);
 }

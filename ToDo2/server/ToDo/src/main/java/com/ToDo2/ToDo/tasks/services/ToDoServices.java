@@ -23,6 +23,8 @@ public class ToDoServices {
 	public List<Tasks> getAllTasksByUserId(@PathVariable long userId) {
 
 		List<Tasks> tasksList = tasksRepo.getAllTasksByUserId(userId);
+		List<Tasks> tasksListAsPartner = tasksRepo.getAllTasksByPartnerId(userId);
+		tasksList.addAll(tasksListAsPartner);
 		Date date = new Date();
 		String dateCurrent = new SimpleDateFormat("yyyy-MM-dd").format(date);
 

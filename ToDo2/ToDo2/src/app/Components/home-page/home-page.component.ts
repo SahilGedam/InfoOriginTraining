@@ -62,7 +62,7 @@ export class HomePageComponent implements OnInit {
     this.userDetails = localStorage.getItem('userDetails');
     this.userDetails = JSON.parse(this.userDetails);
  
-    this.userId = this.userDetails.userId;
+    this.userId = this.userDetails.userid;
     this.userName = this.userDetails.userName;
  
   }
@@ -141,8 +141,16 @@ export class HomePageComponent implements OnInit {
 
   // fetch all tasks
   getTaskList() {
+
+    console.log(this.userId);
     this.dataservice.getTasksById(this.userId).subscribe((data) => {
+      
       this.taskList = data;
+      console.log(data);
+      
+    },(error)=>{
+      console.log(error);
+      
     });
  
   }

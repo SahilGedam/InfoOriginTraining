@@ -1,22 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    font-family: 'Ubuntu', sans-serif;
+body {
+  font-family: "Ubuntu", sans-serif;
 
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 .error {
-
   border: 1px solid red;
-
 }
 
-
-body.dark-theme{
+body.dark-theme {
   background-color: #2d3436;
   color: #dfe6e9;
 }
@@ -24,6 +21,3 @@ body.light-theme {
   background-color: #dfe6e9;
   color: #2d3436;
 }
-
-
-
