@@ -3,8 +3,11 @@
   <div *ngIf="displayMessage" class="alert alert-danger" role="alert">
     {{ displayMessage }}
   </div>
+  <div *ngIf="collabRequests.length==0" class="alert alert-warning" role="alert">
+    no pending requests
+  </div>
   <div class="requests-display">
-    <div *ngFor="let request of collabRequests ; let i = index" class="col-sm-6">
+    <div *ngFor="let request of collabRequests; let i = index" class="col-sm-6">
       <div class="card  {{ bootStrapClass }}">
         <div class="card-body  {{ bootStrapClass }}">
           <h5 class="card-title  {{ bootStrapClass }}">
