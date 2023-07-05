@@ -12,22 +12,28 @@ import { DataServiceService } from 'src/app/services/data-service.service';
 export class HomePageComponent implements OnInit {
   // tasks stored in taskList
   taskList: any;
-  //regex
-  taskRegex = /^.*[a-zA-Z].*$/;
+
   //validating Date
   validDate: any;
   // to check if submit is clicked
   clickedSubmit: any;
 
+  // get all collaboratin requests
+  collabRequests: any;
+  // tottal request to show at notification
+  totalRequests=0;
+
   currentDate = new Date().toISOString().split('T')[0];
 
   displayMessage: string = '';
+  displayMessageError: string = '';
   // bootstrap class for input
   bootStrapClass = '';
   // bootstrap class for table
   bootStrapTableClass = '';
   userName: string = '';
   userId: number = 0;
+  // full details of a user
   userDetails: any;
 
   // task Form
@@ -35,16 +41,17 @@ export class HomePageComponent implements OnInit {
     task: '',
     time: '',
   };
+  taskRegex = /^.*[a-zA-Z].*$/;
   constructor(
     private dataservice: DataServiceService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getUserName();
-    this.getTaskList();
     this.form.time = new Date().toISOString().split('T')[0];
     this.darkModeToggle();
+    this.getUserName();
+    this.getTaskList();
   }
 
   //inject bootstrap classes in the view
@@ -57,20 +64,44 @@ export class HomePageComponent implements OnInit {
       this.bootStrapTableClass = 'table-dark';
     }
   }
-
   getUserName() {
     this.userDetails = localStorage.getItem('userDetails');
     this.userDetails = JSON.parse(this.userDetails);
- 
+
     this.userId = this.userDetails.userid;
     this.userName = this.userDetails.userName;
- 
+    this.checkRequests(); // calls checkRequests only after getting userName
   }
-  logout() {
-  
-    localStorage.setItem('userDetails', JSON.stringify(null))
-    this.router.navigate(['/login']);
+  checkRequests() {
+    this.dataservice.checkRequests(this.userName).subscribe(
+      (data) => {
+        console.log(data);
+        this.collabRequests=data;
+        this.totalRequests=this.collabRequests.length;
+         console.log(this.collabRequests.length);
+        
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
+
+    // fetch all tasks
+    getTaskList() {
+      console.log(this.userId);
+      this.dataservice.getTasksById(this.userId).subscribe(
+        (data) => {
+          this.taskList = data;
+          // console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+
+
 
   // functions of Input Box
   // check all validations
@@ -93,6 +124,10 @@ export class HomePageComponent implements OnInit {
     } else {
       return true;
     }
+  }
+  logout() {
+    localStorage.setItem('userDetails', JSON.stringify(null));
+    this.router.navigate(['/login']);
   }
   // register Task to TaskService
   registerFn() {
@@ -119,12 +154,12 @@ export class HomePageComponent implements OnInit {
           console.log(data);
         },
         (error) => {
-          this.displayMessage = 'Duplicate Tasks not allowed';
+          this.displayMessageError = 'Duplicate Tasks not allowed';
           console.log(error);
         }
       );
     } else {
-      this.displayMessage = 'Enter Proper Input';
+      this.displayMessageError = 'Enter Proper Input';
     }
   }
   // clear the input box
@@ -133,27 +168,16 @@ export class HomePageComponent implements OnInit {
     this.clickedSubmit = false;
     this.form.time = this.currentDate;
     this.displayMessage = '';
+    this.displayMessageError = '';
   }
 
   // input box ends above
 
   // dashboard code below
 
-  // fetch all tasks
-  getTaskList() {
 
-    console.log(this.userId);
-    this.dataservice.getTasksById(this.userId).subscribe((data) => {
-      
-      this.taskList = data;
-      console.log(data);
-      
-    },(error)=>{
-      console.log(error);
-      
-    });
- 
-  }
+
+  // for buttons in table
   // update if task is completed
   completeTask(data: any) {
     this.dataservice.completeTask(data.id).subscribe(
@@ -169,6 +193,11 @@ export class HomePageComponent implements OnInit {
   updateTask(data1: any, data2: any): void {
     this.router.navigate([`/edit/${data1}/${data2}`]);
   }
+  //route to update task
+  collabTask(data: any) {
+    this.router.navigate([`/colaborate/${data}/${this.userName}`]);
+  }
+ 
   //delete task
   deleteTask(data: any): void {
     this.dataservice.deleteData(data).subscribe(
@@ -179,5 +208,9 @@ export class HomePageComponent implements OnInit {
         this.getTaskList();
       }
     );
+  }
+   // route to requests
+   requestsNavigate(){
+    this.router.navigate([`/requests/${this.userName}`])
   }
 }

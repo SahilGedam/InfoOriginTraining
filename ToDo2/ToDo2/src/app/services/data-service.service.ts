@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -53,11 +52,33 @@ export class DataServiceService {
   checkAvailable(userName: string) {
     return this.http.get(`${this.url}users/checkAvailable/${userName}`);
   }
-  // gets 
+  // gets
   getUserNameSuggestion(firstName: string, lastName: string) {
     return this.http.get(
       `${this.url}users/suggestUserName/${firstName}/${lastName}`
     );
   }
+  // get requests Notifications
+  checkRequests(data: any) {
+    return this.http.get(`${this.url}users/checkRequests/${data}`);
+  }
+  //get all user names
+  getAllUserNames() {
+    return this.http.get(`${this.url}users/allUserNames`);
+  }
 
+  // create request
+  createRequest(data: any) {
+    return this.http.post(`${this.url}users/createRequest`, data);
+  }
+
+  // accept request
+  acceptRequest(data: any,data2:any) {
+    return this.http.put(`${this.url}users/acceptRequest/${data}`,data2,  {  responseType: 'text'});
+  }
+
+  // delete request
+  deleteRequest(data: any) {
+    return this.http.delete(`${this.url}users/deleteRequest/${data}`);
+  }
 }

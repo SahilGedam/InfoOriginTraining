@@ -1,0 +1,15 @@
+.container {
+  margin-top: 30px;
+ 
+}
+.card {
+  margin: 10px;
+}
+.requests-display{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+button{
+    margin-left: 10px;
+}

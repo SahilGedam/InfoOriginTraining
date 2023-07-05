@@ -1,7 +1,6 @@
-
 <div class="container">
   <div class="upper-part">
-    <h3>{{userName}}</h3>
+    <h3>{{ userName }}</h3>
     <div class="parent">
       <div class="mb-3">
         <form>
@@ -10,7 +9,7 @@
               <label for="task">Input Task</label>
               <input
                 type="text"
-                class="form-control form-control-lg {{bootStrapClass}} "
+                class="form-control form-control-lg {{ bootStrapClass }} "
                 id="task"
                 placeholder="Enter Task"
                 [(ngModel)]="form.task"
@@ -19,7 +18,9 @@
                 required
                 [pattern]="taskRegex"
                 maxlength="320"
-                [ngClass]="{ error: task.errors && task.touched && clickedSubmit }"
+                [ngClass]="{
+                  error: task.errors && task.touched && clickedSubmit
+                }"
               />
             </div>
 
@@ -34,7 +35,7 @@
                 required
                 #date="ngModel"
                 [(ngModel)]="form.time"
-                class="form-control form-control-lg {{bootStrapClass}}"
+                class="form-control form-control-lg {{ bootStrapClass }}"
                 placeholder="Enter Date"
                 name="date"
                 id="date"
@@ -47,21 +48,41 @@
                 submit
               </button>
               <button class="btn btn-danger" (click)="clearFn()">clear</button>
-              <button class="btn btn-danger logout-btn" (click)="logout()">logout</button>
+              <button
+                type="button"
+                class="btn btn-warning position-relative"
+                (click)="requestsNavigate()"
+              >
+                requests
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  >{{ totalRequests }}</span
+                >
+              </button>
+              <button class="btn btn-danger logout-btn" (click)="logout()">
+                logout
+              </button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <div *ngIf="displayMessage">
-    <p>{{displayMessage}}</p>
+ 
+
+  <div *ngIf="displayMessageError" class="alert alert-danger" role="alert">
+    {{ displayMessageError }}
   </div>
-<!-- input box ends above  -->
+  <div *ngIf="displayMessage" class="alert alert-success" role="alert">
+    {{ displayMessage }}
+  </div>
+  <!-- input box ends above  -->
   <div class="lower-part">
     <h3>Task List</h3>
     <div class="table-responsive">
-      <table class="table table-responsive table-striped {{bootStrapTableClass}}">
+      <table
+        class="table table-responsive table-striped {{ bootStrapTableClass }}"
+      >
         <thead>
           <tr>
             <th scope="col">Id</th>
@@ -81,6 +102,7 @@
             ]"
           >
             <th>{{ i + 1 }}</th>
+            <!-- <th>{{ tasks | json }}</th> -->
             <!-- <th>{{ tasks.id }}</th> -->
 
             <th *ngIf="tasks.time < 0">Task Expired</th>
@@ -111,6 +133,14 @@
                 <button class="btn btn-danger" (click)="deleteTask(tasks.id)">
                   delete
                 </button>
+                <button *ngIf="userId == tasks.userId"
+                  [disabled]="userId != tasks.userId || !tasks.status"
+                  class="btn btn-warning"
+                  (click)="collabTask(tasks.task)"
+                >
+                  collab
+                </button>
+              
               </div>
             </th>
           </tr>

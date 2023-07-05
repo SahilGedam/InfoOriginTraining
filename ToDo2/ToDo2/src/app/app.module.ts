@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './Components/login/login.component';
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
 import { AuthGuard } from './services/auth.guard';
+import { CollaborateComponent } from './Components/collaborate/collaborate.component';
+import { RequestsComponent } from './Components/requests/requests.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { AuthGuard } from './services/auth.guard';
     EditTaskComponent,
     LoginComponent,
     SignUpComponent,
+    CollaborateComponent,
+    RequestsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

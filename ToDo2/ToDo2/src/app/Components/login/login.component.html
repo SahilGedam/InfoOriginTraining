@@ -1,5 +1,11 @@
 <div class="container">
   <h3>Login User</h3>
+  <!-- <div *ngIf="displayMessage">
+    <small class="text-danger"> {{ displayMessage }} </small>
+  </div> -->
+  <div *ngIf="displayMessage" class="alert alert-danger" role="alert">
+    {{ displayMessage }}
+  </div>
   <div class="mt-4">
     <form #register="ngForm" (ngSubmit)=" registerFn()">
       <div class="mb-3">
@@ -64,9 +70,7 @@
           >
         </div>
       </div>
-      <div *ngIf="displayMessage">
-        <small class="text-danger"> {{ displayMessage }} </small>
-      </div>
+     
       <div class="mb-3 btn-div">
         <div class="btn1">
           <button #submit class="btn btn-success" type="submit">Submit</button>

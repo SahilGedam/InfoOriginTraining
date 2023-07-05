@@ -43,6 +43,7 @@ button:disabled {
   float: right;
 }
 
+
 /* dashboard css  */
 table {
   width: 100%;
@@ -55,5 +56,10 @@ th {
   text-align: center;
 }
 
-
+.btn-div-2{
+  display: flex;
+}
+.close-alert{
+  float: right;
+}
 

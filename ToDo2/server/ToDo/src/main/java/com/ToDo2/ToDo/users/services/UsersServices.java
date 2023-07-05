@@ -84,6 +84,15 @@ public class UsersServices {
 		List<Users> usersList = usersRepo.findAll();
 		return usersList;
 	}
+	public List<String> getAllUserNames() {
+		List<Users> usersList = usersRepo.findAll();
+		List<String> userNameList = new ArrayList<String>();
+		
+		for(int i =0;i<usersList.size();i++) {
+			userNameList.add(usersList.get(i).getUserName());
+		}
+		return userNameList;
+	}
 
 	public void createRequest(@RequestBody Requests newRequestBody) {
 		requestsRepo.save(newRequestBody);

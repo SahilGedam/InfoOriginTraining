@@ -78,10 +78,10 @@ export class SignUpComponent implements OnInit {
       return false;
     }
   }
-  selectUserNameButton(data: any) {
+  selectUserNameButton(data: any) { // selects userName from select to userName field
     this.form.username = data;
   }
-  checkAvailable() {
+  checkAvailable() { // api to check if userName is available
     let userName = this.form.username;
     this.dataservice.checkAvailable(userName).subscribe(
       (data) => {
@@ -93,7 +93,7 @@ export class SignUpComponent implements OnInit {
     );
   }
 
-  getUserNameSuggestion() {
+  getUserNameSuggestion() { // suggests userName from firstName and lastName
     let firstName = this.form.fname;
     let lastName = this.form.lname;
     if (firstName && lastName) {

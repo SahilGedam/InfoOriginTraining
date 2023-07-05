@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   bootStrapClass = '';
   clickedSubmit = false;
   validInput = false;
-  // integreRegex = /^\d+$/;
   passwordRegex =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
   emailRegex =
@@ -39,25 +38,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  registerFn() {
-    this.clickedSubmit = true;
-    this.validateInput();
-    if (this.validInput) {
-      let userName = this.form.username;
-      let password = this.form.password;
-      this.dataservice.loginUser(userName, password).subscribe(
-        (data) => {
-          localStorage.setItem('userDetails', JSON.stringify(data));
-          this.userDetails = data;
-          this.checkUserIsAvailable();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
-  }
-  validateInput() {
+  validateInput() { 
     if (
       this.form.password != '' &&
       this.form.username != '' &&
@@ -72,6 +53,26 @@ export class LoginComponent implements OnInit {
       return false;
     }
   }
+
+  registerFn() {
+    this.clickedSubmit = true;
+    this.validateInput();
+    if (this.validInput) {
+      let userName = this.form.username;
+      let password = this.form.password;
+      this.dataservice.loginUser(userName, password).subscribe(
+        (data) => {
+          localStorage.setItem('userDetails', JSON.stringify(data));
+          this.userDetails = data; // if invalid user -> data returns null
+          this.checkUserIsAvailable();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
   checkUserIsAvailable() {
     if (this.userDetails) {
       this.navigateHome();
