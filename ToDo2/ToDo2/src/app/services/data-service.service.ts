@@ -28,7 +28,7 @@ export class DataServiceService {
   }
   // save data
   saveData(data: any) {
-    return this.http.post(`${this.url}tasks/saveTask`, data);
+    return this.http.post(`${this.url}tasks/saveTask`, data,  {  responseType: 'text'});
   }
   // delete
   deleteData(data: any) {
@@ -82,5 +82,14 @@ export class DataServiceService {
   // delete request
   deleteRequest(data: any) {
     return this.http.delete(`${this.url}users/deleteRequest/${data}`);
+  }
+
+  // get accepted requests
+  checkRequestsByStatus(data: any,data2: any) {
+    return this.http.get(`${this.url}users/checkRequestsByStatus/${data}/${data2}`);
+  }
+  // reject requests
+  rejectRequest(data: any,data2: any){
+    return this.http.put(`${this.url}users/rejectRequest/${data}`,data2);
   }
 }

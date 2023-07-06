@@ -88,6 +88,9 @@ public class UsersServices {
 		List<String> userNameList = new ArrayList<String>();
 
 		for (int i = 0; i < usersList.size(); i++) {
+			if (usersList.get(i).getBookedTime()>=28800) { // if booked for 8 hours , dont show
+				continue;
+			}
 			userNameList.add(usersList.get(i).getUserName());
 		}
 		return userNameList;
@@ -97,31 +100,50 @@ public class UsersServices {
 		requestsRepo.save(newRequestBody);
 
 	}
-
+// for reciever
 	public List<Requests> getAllRequestsByUserName(@PathVariable String userName) {
+	
+	
 		return usersRepo.getRequestByUserName(userName);
 	}
+	// for sender
+	public List<Requests> getAllRequestsByUserNameAndStatus(@PathVariable String userName ,@PathVariable String status ) {
+		return usersRepo.getRequestByUserNameAndStatus(userName, status);
+	}
+	
 
 	public String acceptRequest(@PathVariable String userName, @RequestBody Requests newRequestBody) {
 		// user in db is the one who accepts request
+		long requestId = newRequestBody.getRequestId();
+		long bookingTime = newRequestBody.getRequestedTime();
+		long taskId = newRequestBody.getTaskId();
+		
 		Users userInDb = usersRepo.getUserByUserName(userName);
 		long partnerId = userInDb.getUserid();
 		long bookedTime = userInDb.getBookedTime();
-		long requestId = newRequestBody.getRequestId();
-		long bookingTime = newRequestBody.getRequestedTime();
+		
 		long newTotalTime = bookingTime + bookedTime;
+	
 		if (newTotalTime <= 28800) {
 			userInDb.setBookedTime(newTotalTime); // updated the time of user
 			usersRepo.save(userInDb);
 			String taskName = newRequestBody.getTaskName();
-			Tasks taskToCollab = usersRepo.getTasksByTaskName(taskName);
+			Tasks taskToCollab = usersRepo.getTasksByTaskId(taskId);
+//			Tasks taskToCollab = usersRepo.getTasksByTaskName(taskName);
 			taskToCollab.setPartnerId(partnerId);
 			tasksRepo.save(taskToCollab); // sets partner id to the task
-			requestsRepo.deleteById(requestId); // delete the request after accepting
+		//	requestsRepo.deleteById(requestId); // delete the request after accepting
+			newRequestBody.setStatus("Accepted");
+			requestsRepo.save(newRequestBody);
 			return "Accepted";
 		} else {
 			return "8 hours completed";
 		}
+	}
+	
+	public void rejectRequest(@PathVariable String userName, @RequestBody Requests newRequestBody) {
+		newRequestBody.setStatus("Rejected");
+		requestsRepo.save(newRequestBody);
 	}
 
 	public void deleteRequest(@PathVariable long requestId) {

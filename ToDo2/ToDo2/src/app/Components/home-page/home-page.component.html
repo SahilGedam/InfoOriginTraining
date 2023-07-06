@@ -137,7 +137,7 @@
                 <button *ngIf="userId == tasks.userId"
                   [disabled]="userId != tasks.userId || !tasks.status"
                   class="btn btn-warning"
-                  (click)="collabTask(tasks.task)"
+                  (click)="collabTask(tasks.task , tasks.id)"
                 >
                   collab
                 </button>

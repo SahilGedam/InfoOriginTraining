@@ -55,11 +55,19 @@ public class ToDoServices {
 		return tasksList;
 	}
 
-	public Tasks saveTasks(@RequestBody Tasks newTaskBody) {
+	public String saveTasks(@RequestBody Tasks newTaskBody) {
+		String newTaskName = newTaskBody.getTask();
+		long userId = newTaskBody.getUserId();
+		Tasks taskIfAvailableInDb = tasksRepo.getTaskByTaskNameAndUserId(newTaskName, userId);
+		if (taskIfAvailableInDb == null) {
 
-		tasksRepo.save(newTaskBody);
+			tasksRepo.save(newTaskBody);
+			return "Task Added Succesfully";
+		}else {
+			return "Duplicate Task";
+		}
+		
 
-		return newTaskBody;
 
 	}
 
@@ -94,6 +102,5 @@ public class ToDoServices {
 		tasksRepo.delete(taskToDelete);
 
 	}
-
 
 }

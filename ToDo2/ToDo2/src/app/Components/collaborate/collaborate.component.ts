@@ -13,6 +13,7 @@ export class CollaborateComponent implements OnInit {
   bootStrapClass = '';
   alertMessage = '';
   userName: any;
+  taskId:any;
   allUserNames: any;
   totalSeconds: any;
   clickedSubmit = false;
@@ -28,6 +29,7 @@ export class CollaborateComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.collabTask = this.activatedRoute.snapshot.paramMap.get('task');
+    this.taskId=this.activatedRoute.snapshot.paramMap.get('id');
     this.userName = this.activatedRoute.snapshot.paramMap.get('userName');
     this.getAllUserNames();
     this.darkModeToggle();
@@ -64,6 +66,8 @@ export class CollaborateComponent implements OnInit {
       receiverName: this.form.partnerName,
       requestedTime: this.totalSeconds,
       taskName: this.collabTask,
+      taskId:this.taskId,
+      status : 'Pending'
     
     };
 

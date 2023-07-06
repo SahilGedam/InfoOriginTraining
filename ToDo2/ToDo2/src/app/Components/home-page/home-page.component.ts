@@ -35,6 +35,8 @@ export class HomePageComponent implements OnInit {
   userId: number = 0;
   // full details of a user
   userDetails: any;
+  acceptedRequests: any;
+  rejectedRequests: any;
 
   // task Form
   form = {
@@ -77,14 +79,35 @@ export class HomePageComponent implements OnInit {
       (data) => {
     
         this.collabRequests=data;
-        this.totalRequests=this.collabRequests.length;
-     
+        this.totalRequests=this.collabRequests.length+this.totalRequests;
+       this.showPendingRequestsOnly()
         
       },
       (error) => {
         console.log(error);
       }
     );
+    this.dataservice
+    .checkRequestsByStatus(this.userName, 'Accepted')
+    .subscribe((data) => {
+      this.acceptedRequests = data;
+      this.totalRequests=this.acceptedRequests.length+this.totalRequests;
+      console.log(this.acceptedRequests);
+      
+    });
+  this.dataservice
+    .checkRequestsByStatus(this.userName, 'Rejected')
+    .subscribe((data) => {
+      this.rejectedRequests = data;
+      this.totalRequests=this.rejectedRequests.length+this.totalRequests;
+    });
+  }
+  showPendingRequestsOnly(){
+    this.collabRequests = this.collabRequests.filter((value: any)=>{
+      return value.status == 'Pending';
+    })
+    this.totalRequests=this.collabRequests.length;
+
   }
 
     // fetch all tasks
@@ -150,11 +173,16 @@ export class HomePageComponent implements OnInit {
       this.dataservice.saveData(taskSent).subscribe(
         (data) => {
           this.getTaskList();
-          this.displayMessage = 'Task Entered Successfully';
+          if (data == "Task Added Succesfully"){
+
+            this.displayMessage = data;
+          }else{
+            this.displayMessageError = 'Duplicate Tasks not allowed';
+          }
     
         },
         (error) => {
-          this.displayMessageError = 'Duplicate Tasks not allowed';
+          // this.displayMessageError = 'Duplicate Tasks not allowed';
           console.log(error);
         }
       );
@@ -194,8 +222,8 @@ export class HomePageComponent implements OnInit {
     this.router.navigate([`/edit/${data1}/${data2}`]);
   }
   //route to update task
-  collabTask(data: any) {
-    this.router.navigate([`/colaborate/${data}/${this.userName}`]);
+  collabTask(data: any , data2: any): void {
+    this.router.navigate([`/colaborate/${data}/${data2}/${this.userName}`]);
   }
  
   //delete task

@@ -2,11 +2,44 @@
   <h3>requests for collab</h3>
   <div *ngIf="displayMessage" class="alert alert-danger" role="alert">
     {{ displayMessage }}
-    <button type="button" (click)="clearMessage()" class="btn-close" aria-label="Close"></button>
+    <button
+      type="button"
+      (click)="clearMessage()"
+      class="btn-close"
+      aria-label="Close"
+    ></button>
   </div>
-  <div *ngIf="collabRequests.length==0" class="alert alert-warning" role="alert">
+  <div *ngIf="totalRequests == 0" class="alert alert-warning" role="alert">
     no pending requests
-    <!-- <button type="button" (click)="clearMessage()" class="btn-close" aria-label="Close"></button> -->
+  </div>
+
+  <div
+    *ngFor="let rejected of rejectedRequests"
+    class="alert alert-danger"
+    role="alert"
+  >
+    {{ rejected.receiverName }} has rejected your request for task
+    {{ rejected.taskName }}
+    <button
+      type="button"
+      (click)="deleteRequest(rejected.requestId)"
+      class="btn-close"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div
+    *ngFor="let accepted of acceptedRequests"
+    class="alert alert-success"
+    role="alert"
+  >
+    {{ accepted.receiverName }} has accepted your request for task
+    {{ accepted.taskName }}
+    <button
+      type="button"
+      (click)="deleteRequest(accepted.requestId)"
+      class="btn-close"
+      aria-label="Close"
+    ></button>
   </div>
   <div class="requests-display">
     <div *ngFor="let request of collabRequests; let i = index" class="col-sm-6">
@@ -23,10 +56,7 @@
           <button (click)="acceptRequest(request)" class="btn btn-success">
             accept
           </button>
-          <button
-            (click)="deleteRequest(request.requestId)"
-            class="btn btn-danger"
-          >
+          <button class="btn btn-danger" (click)="rejectRequest(request)">
             reject
           </button>
         </div>

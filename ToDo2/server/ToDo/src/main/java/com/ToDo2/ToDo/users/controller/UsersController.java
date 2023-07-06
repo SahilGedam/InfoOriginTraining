@@ -72,6 +72,11 @@ public class UsersController {
 	public List<Requests> getRequestByUserName(@PathVariable String userName) {
 		return usersServices.getAllRequestsByUserName(userName);
 	}
+	
+	@GetMapping(value = "/checkRequestsByStatus/{userName}/{status}")
+	public List<Requests> getRequestByUserNameAndStatus(@PathVariable String userName,@PathVariable String status ) {
+		return usersServices.getAllRequestsByUserNameAndStatus(userName, status);
+	}
 
 	@PutMapping(value = "/acceptRequest/{userName}")
 	public String acceptRequest(@PathVariable String userName, @RequestBody Requests newRequestBody) {
@@ -79,6 +84,12 @@ public class UsersController {
 		return returnMessage;
 	}
 
+	@PutMapping(value = "/rejectRequest/{userName}")
+	public ResponseEntity<Object>  rejectRequest(@PathVariable String userName, @RequestBody Requests newRequestBody) {
+		usersServices.rejectRequest(userName, newRequestBody);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	@DeleteMapping(value = "deleteRequest/{requestId}")
 	public ResponseEntity<Object> deleteRequest(@PathVariable long requestId) {
 		usersServices.deleteRequest(requestId);

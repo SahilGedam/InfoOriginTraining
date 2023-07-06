@@ -33,11 +33,11 @@ public class ToDoController {
 
 // save tasks
 	@PostMapping(value = "/saveTask")
-	public ResponseEntity<Object> saveTasks(@RequestBody Tasks task) {
+	public String  saveTasks(@RequestBody Tasks task) {
 
-		toDoServices.saveTasks(task);
+	String returnMessage = 	toDoServices.saveTasks(task);
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		return returnMessage;
 	}
 
 // update task

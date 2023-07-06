@@ -21,7 +21,13 @@ public interface UsersRepo extends JpaRepository<Users, Long> {
 	@Query("SELECT req FROM Requests req WHERE req.receiverName = :receiver_name")
 	public List <Requests> getRequestByUserName(@RequestParam("receiver_name") String receiver_name );
 	
+	@Query("SELECT req FROM Requests req WHERE req.senderName = :sender_name and req.status = :status")
+	public List <Requests> getRequestByUserNameAndStatus(@RequestParam("sender_name") String sender_name , @RequestParam("status") String status  );
+	
 	@Query("SELECT task FROM Tasks task WHERE task.task = :task_name")
 	public Tasks getTasksByTaskName(String task_name);
+	
+	@Query("SELECT task FROM Tasks task WHERE task.id = :taskId")
+	public Tasks getTasksByTaskId( long taskId);
 
 }

@@ -34,7 +34,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'colaborate/:task/:userName',
+    path: 'colaborate/:task/:id/:userName',
     component: CollaborateComponent,
     canActivate: [AuthGuard],
   },
