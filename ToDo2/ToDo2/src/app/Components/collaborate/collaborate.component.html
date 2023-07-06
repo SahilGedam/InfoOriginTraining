@@ -2,6 +2,7 @@
   <h3>Collaborate Task Request</h3>
   <div *ngIf="alertMessage" class="alert alert-danger" role="alert">
     {{ alertMessage }}
+    <button type="button" (click)="clearFn()" class="btn-close" aria-label="Close"></button>
   </div>
   <div class="mt-4">
     <div class="form-div">

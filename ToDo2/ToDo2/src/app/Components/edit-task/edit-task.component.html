@@ -37,8 +37,9 @@
       <button class="btn btn-danger" (click)="clearFn()">clear</button>
     </div>
   </div>
-  <div *ngIf="displayMessage">
-    <p>{{displayMessage}}</p>
+  <div *ngIf="displayMessage" class="alert alert-danger" role="alert">
+    {{ displayMessage }}
+    <button type="button" (click)="clearFn()" class="btn-close" aria-label="Close"></button>
   </div>
 </div>
 

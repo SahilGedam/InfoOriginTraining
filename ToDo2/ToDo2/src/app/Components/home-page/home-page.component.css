@@ -42,6 +42,12 @@ button:disabled {
 
   float: right;
 }
+.btn-close{
+  float: right;
+  padding: 0px;
+  margin-top: 5px;
+ 
+}
 
 
 /* dashboard css  */

@@ -2,9 +2,11 @@
   <h3>requests for collab</h3>
   <div *ngIf="displayMessage" class="alert alert-danger" role="alert">
     {{ displayMessage }}
+    <button type="button" (click)="clearMessage()" class="btn-close" aria-label="Close"></button>
   </div>
   <div *ngIf="collabRequests.length==0" class="alert alert-warning" role="alert">
     no pending requests
+    <!-- <button type="button" (click)="clearMessage()" class="btn-close" aria-label="Close"></button> -->
   </div>
   <div class="requests-display">
     <div *ngFor="let request of collabRequests; let i = index" class="col-sm-6">

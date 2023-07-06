@@ -22,3 +22,9 @@ button {
 button:disabled {
   background-color: grey;
 }
+.btn-close{
+  float: right;
+  padding: 0px;
+  margin-top: 5px;
+ 
+}

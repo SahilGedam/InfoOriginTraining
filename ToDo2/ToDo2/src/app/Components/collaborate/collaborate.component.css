@@ -4,3 +4,9 @@
   button{
     margin: 10px;
   }
+  .btn-close{
+    float: right;
+    padding: 0px;
+    margin-top: 5px;
+   
+  }

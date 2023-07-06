@@ -75,6 +75,10 @@ public class UsersServices {
 // login user
 	public Users getUserByLogin(@PathVariable String userName, @PathVariable String password) {
 		Users loginUser = usersRepo.getUserByLogin(userName, password);
+		if (loginUser != null) {
+
+			loginUser.setPassword(null);
+		}
 		return loginUser;
 	}
 
@@ -82,8 +86,8 @@ public class UsersServices {
 	public List<String> getAllUserNames() {
 		List<Users> usersList = usersRepo.findAll();
 		List<String> userNameList = new ArrayList<String>();
-		
-		for(int i =0;i<usersList.size();i++) {
+
+		for (int i = 0; i < usersList.size(); i++) {
 			userNameList.add(usersList.get(i).getUserName());
 		}
 		return userNameList;
@@ -115,7 +119,7 @@ public class UsersServices {
 			tasksRepo.save(taskToCollab); // sets partner id to the task
 			requestsRepo.deleteById(requestId); // delete the request after accepting
 			return "Accepted";
-		}else {
+		} else {
 			return "8 hours completed";
 		}
 	}

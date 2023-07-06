@@ -72,9 +72,11 @@
 
   <div *ngIf="displayMessageError" class="alert alert-danger" role="alert">
     {{ displayMessageError }}
+    <button type="button" (click)="clearFn()" class="btn-close" aria-label="Close"></button>
   </div>
-  <div *ngIf="displayMessage" class="alert alert-success" role="alert">
+  <div *ngIf="displayMessage" (click)="clearFn()" class="alert alert-success" role="alert">
     {{ displayMessage }}
+    <button type="button" class="btn-close" aria-label="Close"></button>
   </div>
   <!-- input box ends above  -->
   <div class="lower-part">

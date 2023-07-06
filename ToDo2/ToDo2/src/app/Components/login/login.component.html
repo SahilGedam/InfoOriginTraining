@@ -3,6 +3,7 @@
 
   <div *ngIf="displayMessage" class="alert alert-danger" role="alert">
     {{ displayMessage }}
+    <button type="button" (click)="clearFn()" class="btn-close" aria-label="Close"></button>
   </div>
   <div class="mt-4">
     <form #register="ngForm" (ngSubmit)=" registerFn()">

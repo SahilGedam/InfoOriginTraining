@@ -99,4 +99,7 @@ export class CollaborateComponent implements OnInit {
       return value !== this.userName;
     });
   }
+  clearFn(){
+    this.alertMessage='';
+  }
 }

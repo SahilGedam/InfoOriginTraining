@@ -59,7 +59,7 @@ export class EditTaskComponent {
           this.router.navigate(['home']);
         },
         (error) => {
-          this.displayMessage = 'duplicate entries not allowed';
+          this.displayMessage = 'duplicate tasks not allowed';
         }
       );
     } else {
