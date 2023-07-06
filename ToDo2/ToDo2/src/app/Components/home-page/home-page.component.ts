@@ -75,10 +75,10 @@ export class HomePageComponent implements OnInit {
   checkRequests() {
     this.dataservice.checkRequests(this.userName).subscribe(
       (data) => {
-        console.log(data);
+    
         this.collabRequests=data;
         this.totalRequests=this.collabRequests.length;
-         console.log(this.collabRequests.length);
+     
         
       },
       (error) => {
@@ -89,11 +89,11 @@ export class HomePageComponent implements OnInit {
 
     // fetch all tasks
     getTaskList() {
-      console.log(this.userId);
+  
       this.dataservice.getTasksById(this.userId).subscribe(
         (data) => {
           this.taskList = data;
-          // console.log(data);
+       
         },
         (error) => {
           console.log(error);
@@ -151,7 +151,7 @@ export class HomePageComponent implements OnInit {
         (data) => {
           this.getTaskList();
           this.displayMessage = 'Task Entered Successfully';
-          console.log(data);
+    
         },
         (error) => {
           this.displayMessageError = 'Duplicate Tasks not allowed';

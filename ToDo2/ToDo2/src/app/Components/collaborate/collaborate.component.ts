@@ -58,20 +58,20 @@ export class CollaborateComponent implements OnInit {
     this.clickedSubmit = true;
     this.totalSeconds =
       this.form.collabHours * 3600 + this.form.collabMinutes * 60;
-    console.log(this.form);
+   
     let requestSent = {
       senderName: this.userName,
       receiverName: this.form.partnerName,
       requestedTime: this.totalSeconds,
       taskName: this.collabTask,
-      status: true,
+    
     };
 
-    console.log(requestSent);
+   
     if (this.validateInput()) {
       this.dataservice.createRequest(requestSent).subscribe(
         (data) => {
-          console.log(data);
+        
           this.router.navigate(['home']);
         },
         (error) => {
@@ -85,7 +85,7 @@ export class CollaborateComponent implements OnInit {
   getAllUserNames() {
     this.dataservice.getAllUserNames().subscribe(
       (data) => {
-        console.log(data);
+      
         this.allUserNames = data;
         this.removeUserNameFromArray();
       },

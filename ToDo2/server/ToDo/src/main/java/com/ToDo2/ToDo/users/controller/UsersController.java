@@ -53,11 +53,7 @@ public class UsersController {
 	}
 
 	// for new requirements below
-	// fetch users
-	@GetMapping(value = "/allUsers")
-	public List<Users> getAllUsers() {
-		return usersServices.getAllUsers();
-	}
+
 	
 	// fetch users
 	@GetMapping(value = "/allUserNames")
@@ -65,7 +61,7 @@ public class UsersController {
 		return usersServices.getAllUserNames();
 	}
 
-//
+
 	@PostMapping(value = "/createRequest")
 	public ResponseEntity<Object> createRequest(@RequestBody Requests newRequestBody) {
 		usersServices.createRequest(newRequestBody);

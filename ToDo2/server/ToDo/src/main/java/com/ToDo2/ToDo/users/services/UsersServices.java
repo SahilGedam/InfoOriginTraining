@@ -1,9 +1,7 @@
 package com.ToDo2.ToDo.users.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,10 +78,7 @@ public class UsersServices {
 		return loginUser;
 	}
 
-	public List<Users> getAllUsers() {
-		List<Users> usersList = usersRepo.findAll();
-		return usersList;
-	}
+// get all usernames to select as partner
 	public List<String> getAllUserNames() {
 		List<Users> usersList = usersRepo.findAll();
 		List<String> userNameList = new ArrayList<String>();
@@ -107,18 +102,17 @@ public class UsersServices {
 		// user in db is the one who accepts request
 		Users userInDb = usersRepo.getUserByUserName(userName);
 		long partnerId = userInDb.getUserid();
-		long requestId = newRequestBody.getRequestId();
 		long bookedTime = userInDb.getBookedTime();
+		long requestId = newRequestBody.getRequestId();
 		long bookingTime = newRequestBody.getRequestedTime();
 		long newTotalTime = bookingTime + bookedTime;
 		if (newTotalTime <= 28800) {
-			userInDb.setBookedTime(newTotalTime);
+			userInDb.setBookedTime(newTotalTime); // updated the time of user
 			usersRepo.save(userInDb);
 			String taskName = newRequestBody.getTaskName();
 			Tasks taskToCollab = usersRepo.getTasksByTaskName(taskName);
-			System.out.println(taskToCollab);
 			taskToCollab.setPartnerId(partnerId);
-			tasksRepo.save(taskToCollab);
+			tasksRepo.save(taskToCollab); // sets partner id to the task
 			requestsRepo.deleteById(requestId); // delete the request after accepting
 			return "Accepted";
 		}else {

@@ -19,7 +19,7 @@ public class Tasks {
 	private long userId;
 	@Column(name = "partner_id")
 	private long partnerId;
-	
+
 	public long getUserId() {
 		return userId;
 	}
@@ -83,12 +83,6 @@ public class Tasks {
 	public void setTime(String time) {
 		this.time = time;
 	}
-
-	
-
-
-
-	
 
 	public Tasks() {
 		super();

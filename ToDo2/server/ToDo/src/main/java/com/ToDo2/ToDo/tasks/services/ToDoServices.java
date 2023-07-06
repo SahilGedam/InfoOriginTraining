@@ -95,37 +95,5 @@ public class ToDoServices {
 
 	}
 
-//	public List<Tasks> getAllTasks() {
-//	List<Tasks> tasksList = tasksRepo.findAll();
-//
-//	Date date = new Date();
-//	String dateCurrent = new SimpleDateFormat("yyyy-MM-dd").format(date);
-//
-//
-//	// logic to set status as false if currentDate is greater than expire date
-//	for (int i = 0; i < tasksList.size(); i++) {
-//		if (tasksList.get(i).getTime().compareTo(dateCurrent) < 0) {
-//			tasksList.get(i).setStatus(false);
-//		}
-//
-//		// logic to calculate remaining days and send them in time column
-//		try {
-//			Date dateCurrentInFormat = new SimpleDateFormat("yyyy-MM-dd").parse(dateCurrent);
-//
-//			Date dateExpiryInFormat = new SimpleDateFormat("yyyy-MM-dd").parse(tasksList.get(i).getTime());
-//
-//			long diffrence = dateExpiryInFormat.getTime() - dateCurrentInFormat.getTime();
-//
-//			String remainingDaysString = Long.toString(TimeUnit.DAYS.convert(diffrence, TimeUnit.MILLISECONDS));
-//
-//			tasksList.get(i).setTime(remainingDaysString);
-//		} catch (ParseException e) {
-//
-//			e.printStackTrace();
-//		}
-//
-//	}
-//
-//	return tasksList;
-//}
+
 }

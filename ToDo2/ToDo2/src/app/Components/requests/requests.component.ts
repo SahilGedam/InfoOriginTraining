@@ -35,7 +35,7 @@ export class RequestsComponent implements OnInit {
   checkRequests() {
     this.dataservice.checkRequests(this.userName).subscribe(
       (data: any) => {
-        console.log(data);
+    
         this.collabRequests = data;
         this.newArrayForTimeString();
       },
@@ -52,19 +52,19 @@ export class RequestsComponent implements OnInit {
         .substr(11, 8));
     });
 
-    console.log(this.timeStringArray);
+ 
   }
 
   acceptRequest(data: any) {
-    console.log(data);
+ 
     this.clearMessage()
     
     this.dataservice.acceptRequest(this.userName, data).subscribe(
       (value) => {
-        console.log(value);
+   
         if (value == '8 hours completed') {
           // alert(value);
-          this.displayMessage ='8 hours completed';
+          this.displayMessage ='cannot exceed 8 hours time limit';
         }
         this.checkRequests();
       },
@@ -77,12 +77,12 @@ export class RequestsComponent implements OnInit {
     this.displayMessage='';
   }
   deleteRequest(data: any) {
-    console.log(data);
+  
     this.clearMessage()
 
     this.dataservice.deleteRequest(data).subscribe(
       (value) => {
-        console.log(value);
+    
         this.checkRequests();
       },
       (error) => {

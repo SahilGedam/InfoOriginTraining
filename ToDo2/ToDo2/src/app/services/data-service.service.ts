@@ -16,10 +16,8 @@ export class DataServiceService {
 
   //get data get
   url = 'http://localhost:8080/';
-  //get data get
-  getData() {
-    return this.http.get(`${this.url}tasks/allTasks`);
-  }
+
+ 
   // get tasks by id
   getTasksById(data: any) {
     return this.http.get(`${this.url}tasks/tasksByUser/${data}`);
@@ -40,6 +38,8 @@ export class DataServiceService {
   completeTask(taskId: any) {
     return this.http.put(`${this.url}tasks/completeTask/${taskId}`, null);
   }
+
+  // api for users
   // save user
   saveUser(data: any) {
     return this.http.post(`${this.url}users/saveUser`, data);
@@ -58,14 +58,16 @@ export class DataServiceService {
       `${this.url}users/suggestUserName/${firstName}/${lastName}`
     );
   }
-  // get requests Notifications
-  checkRequests(data: any) {
-    return this.http.get(`${this.url}users/checkRequests/${data}`);
-  }
   //get all user names
   getAllUserNames() {
     return this.http.get(`${this.url}users/allUserNames`);
   }
+  // apis for collab requests 
+  // get requests Notifications
+  checkRequests(data: any) {
+    return this.http.get(`${this.url}users/checkRequests/${data}`);
+  }
+
 
   // create request
   createRequest(data: any) {

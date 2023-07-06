@@ -53,7 +53,7 @@
                 class="btn btn-warning position-relative"
                 (click)="requestsNavigate()"
               >
-                requests
+                notifications
                 <span
                   class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                   >{{ totalRequests }}</span
@@ -102,8 +102,7 @@
             ]"
           >
             <th>{{ i + 1 }}</th>
-            <!-- <th>{{ tasks | json }}</th> -->
-            <!-- <th>{{ tasks.id }}</th> -->
+          
 
             <th *ngIf="tasks.time < 0">Task Expired</th>
 
