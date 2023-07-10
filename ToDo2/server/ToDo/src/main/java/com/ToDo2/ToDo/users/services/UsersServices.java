@@ -82,19 +82,37 @@ public class UsersServices {
 		return loginUser;
 	}
 
-// get all usernames to select as partner
-	public List<String> getAllUserNames() {
-		List<Users> usersList = usersRepo.findAll();
-		List<String> userNameList = new ArrayList<String>();
+//// get all usernames to select as partner
+//	public List<String> getAllUserNames() {
+//		List<Users> usersList = usersRepo.findAll();
+//		List<String> userNameList = new ArrayList<String>();
+//
+//		for (int i = 0; i < usersList.size(); i++) {
+//			if (usersList.get(i).getBookedTime()>=28800) { // if booked for 8 hours , dont show
+//				continue;
+//			}
+//			userNameList.add(usersList.get(i).getUserName());
+//		}
+//		return userNameList;
+//	}
+	
+	// get all usernames to select as partner
+		public List<Users> getAllUserNames() {
+			List<Users> usersList = usersRepo.findAll();
+		
 
-		for (int i = 0; i < usersList.size(); i++) {
-			if (usersList.get(i).getBookedTime()>=28800) { // if booked for 8 hours , dont show
-				continue;
+			for (int i = 0; i < usersList.size(); i++) {
+				usersList.get(i).setEmail(null);
+				usersList.get(i).setPassword(null);
+				usersList.get(i).setEmail(null);
+				usersList.get(i).setUserid(0);
+				usersList.get(i).setFirstName(null);
+				usersList.get(i).setLastName(null);
+			
+			
 			}
-			userNameList.add(usersList.get(i).getUserName());
+			return usersList;
 		}
-		return userNameList;
-	}
 
 	public void createRequest(@RequestBody Requests newRequestBody) {
 		requestsRepo.save(newRequestBody);

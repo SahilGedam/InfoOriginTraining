@@ -54,6 +54,7 @@ export class HomePageComponent implements OnInit {
     this.darkModeToggle();
     this.getUserName();
     this.getTaskList();
+    this.checkRequests();
   }
 
   //inject bootstrap classes in the view

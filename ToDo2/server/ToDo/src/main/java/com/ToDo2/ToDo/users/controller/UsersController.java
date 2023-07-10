@@ -56,11 +56,14 @@ public class UsersController {
 
 	
 	// fetch users
+//	@GetMapping(value = "/allUserNames")
+//	public List<String> getAllUserNames() {
+//		return usersServices.getAllUserNames();
+//	}
 	@GetMapping(value = "/allUserNames")
-	public List<String> getAllUserNames() {
+	public List<Users> getAllUserNames() {
 		return usersServices.getAllUserNames();
 	}
-
 
 	@PostMapping(value = "/createRequest")
 	public ResponseEntity<Object> createRequest(@RequestBody Requests newRequestBody) {

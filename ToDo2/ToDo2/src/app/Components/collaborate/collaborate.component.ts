@@ -100,10 +100,11 @@ export class CollaborateComponent implements OnInit {
   }
   removeUserNameFromArray() {
     this.allUserNames = this.allUserNames.filter((value: any) => {
-      return value !== this.userName;
+      return value.userName !== this.userName;
     });
   }
   clearFn(){
     this.alertMessage='';
   }
+
 }

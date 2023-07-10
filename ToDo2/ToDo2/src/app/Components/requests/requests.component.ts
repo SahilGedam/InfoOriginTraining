@@ -115,4 +115,7 @@ showPendingRequestsOnly(){
       }
     );
   }
+  navigateHome(){
+    this.router.navigate(['home']);
+  }
 }

@@ -1,0 +1,19 @@
+.container {
+  margin-top: 50px;
+}
+.display {
+  margin-top: 50px;
+}
+
+td {
+    padding: 15px;
+    width: 500px;
+    /* border: 1px solid black; */
+
+}
+
+button {
+  margin-top: 23px;
+  margin-left: 10px;
+}
+

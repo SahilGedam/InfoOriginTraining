@@ -1,12 +1,21 @@
 .container {
-    margin-top: 30px;
-  }
-  button{
-    margin: 10px;
-  }
-  .btn-close{
-    float: right;
-    padding: 0px;
-    margin-top: 5px;
-   
-  }
+  margin-top: 30px;
+}
+button {
+  margin: 10px;
+}
+.btn-close {
+  float: right;
+  padding: 0px;
+  margin-top: 5px;
+}
+.error {
+  border: 1px solid red;
+}
+ .unavailable {
+  color: red;
+  border: 1px solid red;
+ }
+ p {
+  float: right;
+ }

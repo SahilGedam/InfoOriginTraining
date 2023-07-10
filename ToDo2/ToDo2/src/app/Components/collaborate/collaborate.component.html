@@ -1,8 +1,14 @@
 <div class="container">
   <h3>Collaborate Task Request</h3>
+ 
   <div *ngIf="alertMessage" class="alert alert-danger" role="alert">
     {{ alertMessage }}
-    <button type="button" (click)="clearFn()" class="btn-close" aria-label="Close"></button>
+    <button
+      type="button"
+      (click)="clearFn()"
+      class="btn-close"
+      aria-label="Close"
+    ></button>
   </div>
   <div class="mt-4">
     <div class="form-div">
@@ -21,11 +27,13 @@
               id=""
             >
               <option
+                [ngClass]="{ unavailable: user.bookedTime == 28800 }"
                 class="form-control {{ bootStrapClass }}"
                 *ngFor="let user of allUserNames"
-                [value]="user"
+                [value]="user.userName"
               >
-                {{ user }}
+                {{ user.userName }}
+                <p *ngIf="user.bookedTime == 28800">User Unavailable</p>
               </option>
             </select>
           </div>
@@ -34,7 +42,7 @@
             <label for="hours">Hours</label>
             <input
               class="form-control {{ bootStrapClass }}"
-              [ngClass]="{ error: totalSeconds<=0 && clickedSubmit }"
+              [ngClass]="{ error: totalSeconds <= 0 && clickedSubmit }"
               [(ngModel)]="form.collabHours"
               name="hours"
               type="number"
@@ -47,7 +55,7 @@
             <label for="minutes">Minutes</label>
             <input
               class="form-control {{ bootStrapClass }}"
-              [ngClass]="{ error: totalSeconds<=0 && clickedSubmit }"
+              [ngClass]="{ error: totalSeconds <= 0 && clickedSubmit }"
               [(ngModel)]="form.collabMinutes"
               name="minutes"
               type="number"

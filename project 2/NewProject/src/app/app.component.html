@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row rows-div">
+    <div class="col cols-div">
+      <label for="noOfInputs">No Of Inputs</label>
+      <input
+        class="form-control input-box"
+        [(ngModel)]="form.noOfInputs"
+        type="number"
+        name=""
+        id="noOfInputs"
+      />
+    </div>
+    <div class="col cols-div">
+      <label for="colsPerRow">Cols per row</label>
+      <input
+        class="form-control input-box"
+        [(ngModel)]="form.colsPerRow"
+        type="number"
+        name=""
+        id="colsPerRow"
+      />
+    </div>
+    <div class="col cols-div">
+      <label for="colspan">Colspan</label>
+      <input
+        class="form-control input-box"
+        [(ngModel)]="form.colspan"
+        type="text"
+        name=""
+        id="colspan"
+      />
+    </div>
+
+    <div class="col cols-div">
+      <button (click)="generateComponents()" class="btn btn-primary">
+        Generate
+      </button>
+      <button class="btn btn-danger" (click)="clear()">clear</button>
+    </div>
+  </div>
+
+  <div class="display">
+    <table class="table">
+      <tr>
+        <td [colSpan]="1" *ngFor="let ele of colsArrayForRows"></td>
+      </tr>
+   
+
+      <tr *ngFor="let row of colspanTwoDarray; let i = index">
+        <td [colSpan]="col" *ngFor="let col of row">
+          <input id="input-box" class="form-control input-box" type="text" />
+        </td>
+      </tr>
+    </table>
+
+    <!-- {{ numberArray }} -->
+    {{ colspanTwoDarray | json }}
+  </div>
+</div>
