@@ -17,3 +17,14 @@ button {
   margin-left: 10px;
 }
 
+.btn-close{
+  float: right;
+  padding: 0px;
+  margin-top: 5px;
+ 
+}
+
+/* .first-row{
+  max-height: 1px;
+  border: 1px solid red;
+} */

@@ -1,0 +1,41 @@
+.container {
+  margin-top: 50px;
+}
+.display {
+  margin-top: 50px;
+}
+
+/* td,
+tr,
+th,
+table {
+  border: 1px solid black;
+}  */
+tr,
+th {
+  height: 50px;
+}
+table {
+  width: 100%;
+
+  background-color: slategrey;
+}
+.inner-table {
+  padding: 0;
+}
+.display-td {
+  border: 1px solid black;
+  width: 100%;
+  background-color: white;
+}
+
+button {
+  margin-top: 23px;
+  margin-left: 10px;
+}
+
+.btn-close {
+  float: right;
+  padding: 0px;
+  margin-top: 5px;
+}
