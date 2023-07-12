@@ -1,0 +1,76 @@
+
+<!-- <div class="container">
+  <form #basicForm="ngForm" (ngSubmit)="generateComponents(basicForm.value)">
+  <div class="row rows-div">
+    <div class="col cols-div">
+      <label for="noOfInputs">No Of Inputs</label>
+      <input
+        class="form-control input-box"
+        (change)="clearOutPutOnChange()"
+        ngModel
+        type="number"
+        name="noOfInputs"
+        id="noOfInputs"
+      />
+    </div>
+    <div class="col cols-div">
+      <label for="colsPerRow">Cols per row</label>
+      <input
+        class="form-control input-box"
+        (change)="clearOutPutOnChange()"
+        ngModel
+        type="number"
+        name="colsPerRow"
+        id="colsPerRow"
+      />
+    </div>
+    <div class="col cols-div">
+      <label for="colspan">Colspan</label>
+      <input
+        class="form-control input-box"
+        (change)="clearOutPutOnChange()"
+        ngModel
+        type="text"
+        name="colspan"
+        id="colspan"
+      />
+    </div>
+
+    <div class="col cols-div">
+      <button  type="submit" class="btn btn-primary">
+        Generate
+      </button>
+      <button type="reset" class="btn btn-danger" (click)="clear()">clear</button>
+    </div>
+  </div>
+  </form>
+
+  <div class="display">
+    <div *ngIf="displayErrorMessage" class="alert alert-danger" role="alert">
+      {{ displayErrorMessage }}
+      <button
+        type="button"
+        (click)="clear()"
+        class="btn-close"
+        aria-label="Close"
+      ></button>
+    </div>
+    <table *ngIf="!displayErrorMessage" class="table">
+      <tr>
+        <td
+          class="first-row"
+          [colSpan]="1"
+          *ngFor="let element of colsArrayForRows"
+        ></td>
+      </tr>
+
+      <tr *ngFor="let row of colspanTwoDarray; let i = index">
+        <td [colSpan]="col" *ngFor="let col of row">
+          <input id="input-box" class="form-control input-box" type="text" />
+        </td>
+      </tr>
+    </table>
+
+    {{ colspanTwoDarray | json }}
+  </div>
+</div> -->

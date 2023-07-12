@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* general css  */
+.container {
+  margin-top: 30px;
+}
+.btn {
+  width: 100%;
+  margin-top: 10px;
+}
+/* upper part  */
+
+.alert {
+  margin-top: 10px;
+}
+
+.btn-close {
+  float: right;
+  padding: 0px;
+  margin-top: 5px;
+}
+
+.outer-div-percentage {
+  height: 20px;
+  width: 100%;
+  margin-top: 8px;
+
+  border: 1px solid black;
+}
+.inner-div-percentage {
+  height: 20px;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.show-percent {
+  margin-left: 20px;
+}
+/* lower part  */
+.display-boxes {
+  margin-top: 50px;
+  min-height: 500px;
+  /* border: 1px solid black; */
+}
+.boxes {
+  min-height: 500px;
+
+  border: 1px solid black;
+}
+.disabled {
+  color: gray;
+  background-color: rgb(246, 243, 243);
+  border: medium solid gray;
+  pointer-events: none;
+}
+.box-col {
+  width: 38%;
+}
+.btn-col {
+  width: 24%;
+}

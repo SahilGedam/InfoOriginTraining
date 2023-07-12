@@ -1,0 +1,30 @@
+.container {
+    margin-top: 50px;
+  }
+  .display {
+    margin-top: 50px;
+  }
+  
+  td {
+      padding: 15px;
+      width: 500px;
+      /* border: 1px solid black; */
+  
+  }
+  
+  button {
+    margin-top: 23px;
+    margin-left: 10px;
+  }
+  
+  .btn-close{
+    float: right;
+    padding: 0px;
+    margin-top: 5px;
+   
+  }
+  
+  /* .first-row{
+    max-height: 1px;
+    border: 1px solid red;
+  } */

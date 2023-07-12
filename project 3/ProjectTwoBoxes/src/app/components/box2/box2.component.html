@@ -1,0 +1,7 @@
+<div [ngClass]="box2deActivated == true ? 'disabled' : ''" class="box2 boxes">
+    <ul class="list-group">
+      <li *ngFor="let task of arrayDataBox2; let i = index" class="list-group-item">
+        {{i+1}} {{ task }}
+      </li>
+    </ul>
+  </div>
