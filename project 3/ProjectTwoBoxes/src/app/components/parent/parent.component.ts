@@ -76,22 +76,22 @@ export class ParentComponent implements OnInit {
     this.completePercentage = Math.floor((this.allTasks.length / 40) * 100);
   }
   checkButtonValid() {
-    if (this.arrayDataBox1.length > 0) {
+    if (this.arrayDataBox1.length > 0 && this.arrayDataBox2.length <20) {
       this.validBtn1 = true;
     } else {
       this.validBtn1 = false;
     }
-    if (this.arrayDataBox2.length > 0) {
+    if (this.arrayDataBox2.length > 0 && this.arrayDataBox1.length <20) {
       this.validBtn2 = true;
     } else {
       this.validBtn2 = false;
     }
-    if (this.arrayDataBox1.length > 1) {
+    if (this.arrayDataBox1.length > 1 && this.arrayDataBox2.length <19) {
       this.validBtn3 = true;
     } else {
       this.validBtn3 = false;
     }
-    if (this.arrayDataBox2.length > 2) {
+    if (this.arrayDataBox2.length > 2 && this.arrayDataBox1.length <18) {
       this.validBtn4 = true;
     } else {
       this.validBtn4 = false;
