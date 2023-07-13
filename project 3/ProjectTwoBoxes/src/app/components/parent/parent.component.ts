@@ -19,7 +19,7 @@ export class ParentComponent implements OnInit {
   box1deActivated = true;
   box2deActivated = true;
   anyBoxActivated = false;
-  //  arrayDataBox1: string[] = ['a','b','c','d','e'];
+  //  arrayDataBox1: string[] = ['a','b'];
   // arrayDataBox2: string[] = ['a1','a2','a3','a4','a5'];
   arrayDataBox1: any[] = [];
   arrayDataBox2: any[] = [];
