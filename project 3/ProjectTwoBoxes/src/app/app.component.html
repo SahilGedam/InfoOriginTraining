@@ -1,10 +1,15 @@
-<app-parent></app-parent>
+  <app-parent></app-parent>   
 
 <!-- <div class="container">
   <div class="row">
     <div class="col">
       <label for="select-box"><small>Select Box</small></label>
-      <select (change)="activateBoxBySelect($event.target)" class="form-control" name="" id="select-box">
+      <select
+        (change)="activateBoxBySelect($event.target)"
+        class="form-control"
+        name=""
+        id="select-box"
+      >
         <option class="form-control" value="">select box</option>
         <option class="form-control" value="1">box 1</option>
         <option class="form-control" value="2">box 2</option>
@@ -15,7 +20,13 @@
     </div>
     <div class="col">
       <label for="input-box"><small>Input Task</small></label>
-      <input #inputBox class="form-control" type="text" name="" id="input-box" />
+      <input
+        #inputBox
+        class="form-control"
+        type="text"
+        name=""
+        id="input-box"
+      />
       <button (click)="registerFn(inputBox.value)" class="btn btn-success">
         submit
       </button>
@@ -23,26 +34,49 @@
     <div class="col">
       <label for="completeBar"><small>Capacity</small></label>
       <div class="outer-div-percentage" id="completeBar">
-        <div [ngStyle]="{
+        <div
+          [ngStyle]="{
             backgroundColor: completePercentage >= 90 ? 'red' : 'green'
-          }" [style.width.%]="completePercentage" class="inner-div-percentage">
-          <span class="show-percent"> {{ completePercentage}}%</span>
+          }"
+          [style.width.%]="completePercentage"
+          class="inner-div-percentage"
+        >
+          <span class="show-percent"> {{ completePercentage }}%</span>
         </div>
       </div>
     </div>
   </div>
   <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
     {{ errorMessage }}
-    <button type="button" (click)="clear()" class="btn-close" aria-label="Close"></button>
+    <button
+      type="button"
+      (click)="clear()"
+      class="btn-close"
+      aria-label="Close"
+    ></button>
   </div>
 
   <div class="display-boxes">
     <div class="row">
       <div class="box-col">
-        <div [ngClass]="box1deActivated == true ? 'disabled' : ''" class="box1 boxes">
-          <ul class="list-group">
-            <li *ngFor="let task of arrayDataBox1 ; let i = index" class="list-group-item">
-              {{i+1}} {{ task }}
+        <div
+          [ngClass]="box1deActivated == true ? 'disabled' : ''"
+          class="box1 boxes"
+        >
+          <ul
+            cdkDropList
+            #arrayDataBoxes1="cdkDropList"
+            [cdkDropListData]="arrayDataBox1"
+            [cdkDropListConnectedTo]="[arrayDataBoxes2]"
+            (cdkDropListDropped)="drop($event)"
+            class="list-group"
+          >
+            <li
+              cdkDrag
+              *ngFor="let task of arrayDataBox1; let i = index"
+              class="list-group-item"
+            >
+              {{ i + 1 }} {{ task }}
             </li>
           </ul>
         </div>
@@ -52,39 +86,77 @@
           <div *ngIf="validBtn1">
             <button (click)="shiftToRight()" class="btn btn-outline-primary">
               shift to right
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-right"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                />
               </svg>
             </button>
           </div>
           <div *ngIf="validBtn2">
             <button (click)="shiftToLeft()" class="btn btn-outline-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                />
               </svg>
               shift to left
             </button>
           </div>
           <div *ngIf="validBtn3">
-            <button (click)="shiftEvenFromLastToRight()" class="btn btn-outline-primary">
+            <button
+              (click)="shiftEvenFromLastToRight()"
+              class="btn btn-outline-primary"
+            >
               shift even pair from last to right
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-right"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                />
               </svg>
             </button>
           </div>
           <div *ngIf="validBtn4">
-            <button (click)="shiftOddFromTopToLeft()" class="btn btn-outline-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-down-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M2 13.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 0-1H3.707L13.854 2.854a.5.5 0 0 0-.708-.708L3 12.293V7.5a.5.5 0 0 0-1 0v6z" />
+            <button
+              (click)="shiftOddFromTopToLeft()"
+              class="btn btn-outline-primary"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-down-left"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 13.5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 0-1H3.707L13.854 2.854a.5.5 0 0 0-.708-.708L3 12.293V7.5a.5.5 0 0 0-1 0v6z"
+                />
               </svg>
               shift odd pair from top to left
             </button>
@@ -92,12 +164,26 @@
         </div>
       </div>
       <div class="box-col">
-        <div [ngClass]="box2deActivated == true ? 'disabled' : ''" class="box2 boxes">
-          <ul class="list-group">
-            <li *ngFor="let task of arrayDataBox2; let i = index" class="list-group-item">
-              {{i+1}} {{ task }}
-            </li>
-          </ul>
+        <div
+          [ngClass]="box2deActivated == true ? 'disabled' : ''"
+          class="box2 boxes"
+        >
+        <ul
+        cdkDropList
+        #arrayDataBoxes2="cdkDropList"
+        [cdkDropListData]="arrayDataBox2"
+        [cdkDropListConnectedTo]="[arrayDataBoxes1]"
+        (cdkDropListDropped)="drop($event)"
+        class="list-group"
+      >
+        <li
+          cdkDrag
+          *ngFor="let task of arrayDataBox2; let i = index"
+          class="list-group-item"
+        >
+          {{ i + 1 }} {{ task }}
+        </li>
+      </ul>
         </div>
       </div>
     </div>

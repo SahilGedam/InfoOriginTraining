@@ -1,7 +1,14 @@
-<div [ngClass]="box2deActivated == true ? 'disabled' : ''" class="box2 boxes">
-    <ul class="list-group">
-      <li *ngFor="let task of arrayDataBox2; let i = index" class="list-group-item">
+<div  [ngClass]="box2deActivated == true ? 'disabled' : ''" class="box2 boxes">
+    <ul
+    cdkDropList 
+    id="arrayDataBoxes2"
+    [cdkDropListData]="arrayDataBox2"
+    cdkDropListConnectedTo="arrayDataBoxes1"
+    (cdkDropListDropped)="onDrop($event)"
+    class="list-group">
+      <li cdkDrag *ngFor="let task of arrayDataBox2; let i = index" class="list-group-item">
         {{i+1}} {{ task }}
       </li>
-    </ul>
+    </ul> 
+
   </div>

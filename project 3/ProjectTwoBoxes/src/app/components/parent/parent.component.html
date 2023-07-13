@@ -55,9 +55,9 @@
   </div>
 
   <div class="display-boxes">
-    <div class="row">
-      <div class="box-col">
-        <app-box1  [box1deActivated]="box1deActivated" [arrayDataBox1]="arrayDataBox1"></app-box1>
+    <div cdkDropListGroup class="row">
+      <div  class="box-col">
+        <app-box1   [box1deActivated]="box1deActivated" [arrayDataBox1]="arrayDataBox1"></app-box1>
       </div>
       <div class="btn-col">
         <div class="buttons">
@@ -141,8 +141,8 @@
           </div>
         </div>
       </div>
-      <div class="box-col">
-        <app-box2 [box2deActivated]="box2deActivated" [arrayDataBox2]="arrayDataBox2"></app-box2>
+      <div  class="box-col">
+        <app-box2  [box2deActivated]="box2deActivated" [arrayDataBox2]="arrayDataBox2"></app-box2>
       </div>
     </div>
   </div>

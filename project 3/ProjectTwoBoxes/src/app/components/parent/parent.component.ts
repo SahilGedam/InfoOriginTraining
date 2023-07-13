@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList,
+} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
@@ -13,8 +19,10 @@ export class ParentComponent implements OnInit {
   box1deActivated = true;
   box2deActivated = true;
   anyBoxActivated = false;
-  arrayDataBox1: string[] = [];
-  arrayDataBox2: string[] = [];
+  //  arrayDataBox1: string[] = ['a','b','c','d','e'];
+  // arrayDataBox2: string[] = ['a1','a2','a3','a4','a5'];
+  arrayDataBox1: any[] = [];
+  arrayDataBox2: any[] = [];
   validBtn1 = false;
   validBtn2 = false;
   validBtn3 = false;
@@ -36,7 +44,18 @@ export class ParentComponent implements OnInit {
       this.currentSelectedBox = '2';
     }
   }
-
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
   registerFn(data: any) {
     if (
       this.anyBoxActivated &&
