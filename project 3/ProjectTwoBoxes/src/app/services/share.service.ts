@@ -27,7 +27,7 @@ export class ShareService {
         event.currentIndex
       );
       transferArrayItem(
-        // modified
+        // modified to swap
         event.container.data,
         event.previousContainer.data,
         event.currentIndex + 1,

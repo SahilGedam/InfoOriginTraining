@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -6,6 +6,7 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
@@ -13,6 +14,7 @@ import {
 })
 export class ParentComponent implements OnInit {
   ngOnInit(): void {}
+
 
   constructor() {}
 
@@ -33,6 +35,13 @@ export class ParentComponent implements OnInit {
   taskInput = '';
   errorMessage = '';
 
+  @HostListener('mousemove') updateButtons() {
+    this.checkButtonValid();
+  }
+  // @HostListener('document:drop', ['$event']) onDrop(event: any) {
+  //   console.log("drop", event)
+
+  // }
   activateBoxBySelect(data: any) {
     this.anyBoxActivated = true;
 
@@ -46,13 +55,17 @@ export class ParentComponent implements OnInit {
   }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
   }
@@ -95,22 +108,22 @@ export class ParentComponent implements OnInit {
     this.completePercentage = Math.floor((this.allTasks.length / 40) * 100);
   }
   checkButtonValid() {
-    if (this.arrayDataBox1.length > 0 && this.arrayDataBox2.length <20) {
+    if (this.arrayDataBox1.length > 0 && this.arrayDataBox2.length < 20) {
       this.validBtn1 = true;
     } else {
       this.validBtn1 = false;
     }
-    if (this.arrayDataBox2.length > 0 && this.arrayDataBox1.length <20) {
+    if (this.arrayDataBox2.length > 0 && this.arrayDataBox1.length < 20) {
       this.validBtn2 = true;
     } else {
       this.validBtn2 = false;
     }
-    if (this.arrayDataBox1.length > 1 && this.arrayDataBox2.length <19) {
+    if (this.arrayDataBox1.length > 1 && this.arrayDataBox2.length < 19) {
       this.validBtn3 = true;
     } else {
       this.validBtn3 = false;
     }
-    if (this.arrayDataBox2.length > 2 && this.arrayDataBox1.length <18) {
+    if (this.arrayDataBox2.length > 2 && this.arrayDataBox1.length < 18) {
       this.validBtn4 = true;
     } else {
       this.validBtn4 = false;

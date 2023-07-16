@@ -1,0 +1,95 @@
+.input-upper-part {
+  border: 1px solid transparent;
+}
+.input-container {
+  margin: auto;
+  width: 50%;
+  /* border: 3px solid green; */
+  padding: 10px;
+}
+.container {
+  margin-top: 30px;
+}
+.submit-btn {
+  margin: 10px;
+}
+.btn-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: none;
+  padding: none;
+  /* border: 1px solid red; */
+}
+.person1 {
+  /* border: 1px solid red; */
+  width: 20%;
+  align-self: end;
+}
+.person2 {
+  /* border: 1px solid red; */
+  width: 20%;
+  align-self: end;
+}
+.walls-div {
+  width: 60%;
+  display: flex;
+  align-items: last baseline;
+  justify-content: center;
+}
+.lower-part-walls {
+  height: 500px;
+}
+.walls {
+  width: 30px;
+
+  margin: 20px;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  background-image: url("../assets/building.jpg");
+  align-self: last baseline;
+}
+.outside-walls {
+  height: 400px;
+
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.wall-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.building-number-display {
+  width: 100%;
+  margin: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.building-height-display {
+  width: 100%;
+  margin: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alert {
+  margin-top: 10px;
+  align-self: flex-start;
+}
+.person-pointing {
+  height: 200px;
+  width: 100px;
+}
+.left-person {
+  float: left;
+}
+.right-person {
+  float: right;
+}
+
+.errors {
+  border: 1px solid red;
+}

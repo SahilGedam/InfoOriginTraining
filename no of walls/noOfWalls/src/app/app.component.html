@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="input-upper-part row">
+    <div class="input-container">
+      <label for="input-box"><small>Input Walls</small></label>
+      <input
+        #inputBox
+        [ngClass]="displayErrorMessage !='' ? 'errors' : '' " 
+        class="form-control"
+        type="text"
+        name=""
+        id="input-box"
+      />
+      <div class="btn-div">
+        <button
+          (click)="registerFn(inputBox.value)"
+          class="btn btn-outline-success submit-btn"
+          [ngClass]="inputBox.value == '' ? 'move' : 'stop'"
+        >
+          Generate Walls
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="lower-part-walls row">
+    <div class="person1">
+      <div *ngIf="!displayErrorMessage">
+        <p *ngIf="wallsForLeftPerson.length > 0">
+          i can see
+          <span *ngFor="let wall of wallsForLeftPerson">
+            building no {{ wall.index + 1 }} of height {{ wall.element }} meters
+            ,
+          </span>
+        </p>
+      </div>
+      <div>
+        <img
+          class="person-pointing left-person"
+          src="../assets/leftman.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="walls-div">
+      <div *ngIf="displayErrorMessage" class="alert alert-danger" role="alert">
+        {{ displayErrorMessage }}
+        <button
+          type="button"
+          (click)="clearAll()"
+          class="btn-close"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div *ngIf="!displayErrorMessage" class="wall-box">
+        <div
+          class="outside-walls"
+          *ngFor="let wall of wallsArrayPercent; let i = index"
+        >
+          <div class="building-number-display">
+            {{ i + 1 }}
+          </div>
+
+          <div class="walls" [style.height.px]="wall * 3"></div>
+
+          <div class="building-height-display">
+            {{ wallsArray[i] }}
+          </div>
+        </div>
+        <!-- <div
+          class="outside-walls"
+          *ngFor="let wall of wallsArrayPercent; let i = index"
+        >
+          <div class="building-number-display">
+            {{ i + 1 }}
+          </div>
+
+          <div class="walls" [style.height.%]="wall"></div>
+
+          <div class="building-height-display">
+            {{ wallsArray[i] }}
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="person2">
+      <div *ngIf="!displayErrorMessage">
+        <p *ngIf="wallsForRightPerson.length > 0">
+          i can see
+          <span *ngFor="let wall of wallsForRightPerson">
+            building no {{ wall.index + 1 }} of height {{ wall.element }} meters
+            ,
+          </span>
+        </p>
+      </div>
+      <div>
+        <img
+          class="person-pointing right-person"
+          src="../assets/rightman.png"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
