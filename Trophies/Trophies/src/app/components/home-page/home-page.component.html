@@ -1,0 +1,46 @@
+<div class="parent">
+  <div class="row">
+    <div class="trophies">
+      <div *ngFor="let city of allTrophies" class="allTrophies">
+        <div [ngClass]="city.status" class="card" style="width: 10rem">
+          <img
+            class="card-img-top"
+            src="../../../assets/trophy-png-30582.png"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h5  class="card-title">{{ city.cityName }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz">
+    
+      <div *ngIf="!congratulationsMessage" class="heading-input">
+        <h4>Take a Quiz</h4>
+      </div>
+      <div *ngIf="congratulationsMessage" class="heading-input">
+        <h4>
+          {{congratulationsMessage}}
+        </h4>
+      </div>
+      <div *ngIf="!congratulationsMessage" class="input-form">
+        <mat-form-field>
+          <mat-label>Select City</mat-label>
+          <mat-select [(ngModel)]="selectedCity">
+            <mat-option *ngFor="let city of allTrophies" [value]="city.cityName">
+              {{ city.cityName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="btn-div">
+        <button *ngIf="!congratulationsMessage" (click)="routeToQuiz()" mat-button color="primary">
+          submit
+        </button>
+        <button (click)="resetAll()" mat-button color="warn">reset all</button>
+      </div>
+    </div>
+  </div>
+</div> 
+

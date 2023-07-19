@@ -14,7 +14,7 @@ export class AppComponent {
   wallsForLeftPerson: any[] = [];
   wallsForRightPerson: any[] = [];
   maxNumberOfArray: any;
-  clicked = false;
+
   registerFn(data: any) {
     if (data) {
       this.clearAll();
@@ -28,19 +28,7 @@ export class AppComponent {
   }
 
   generateNumberArray() {
-    // this.wallsArray = this.inputWalls.split('#');
-
-    // this.wallsArray = this.wallsArray.map((item: string) => {
-    //   if (Number.isNaN(item)) {
-    //     this.displayErrorMessage = 'enter proper input';
-    //     throw new Error('not a number');
-    //   } else {
-    //     return parseFloat(item);
-    //   }
-    // });
-    // this.maxNumberOfArray = Math.max.apply(null, this.wallsArray);
-    // console.log(this.maxNumberOfArray);
-    // this.numberArrayToPercentageArray();
+  
     this.inputWalls = this.inputWalls.replaceAll(',', 'a');
     this.inputWalls = this.inputWalls.replaceAll('#', ',');
     console.log(this.inputWalls);
@@ -81,7 +69,7 @@ export class AppComponent {
         this.wallsForLeftPerson.push({ index: index, element: biggest1 });
       }
     }
-    // console.log(this.wallsForLeftPerson);
+    
     let biggest2 = 0;
     for (let index = this.wallsArray.length - 1; index >= 0; index--) {
       const element = this.wallsArray[index];
@@ -90,6 +78,6 @@ export class AppComponent {
         this.wallsForRightPerson.push({ index: index, element: biggest2 });
       }
     }
-    // console.log(this.wallsForRightPerson);
+  
   }
 }

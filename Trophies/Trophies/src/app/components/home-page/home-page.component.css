@@ -1,0 +1,63 @@
+.parent {
+  width: 100%;
+  height: 90vh;
+  /* border: 1px solid red; */
+}
+.trophies {
+  width: 55%;
+  float: left;
+  /* border: 1px solid green; */
+  height: 650px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.quiz {
+  float: right;
+  /* border: 1px solid blue; */
+  height: 650px;
+  width: 45%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.card-img-top {
+  margin-top: 10px;
+  height: 100px;
+  width: 100px;
+}
+.allTrophies {
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .not-touched {
+  background-color: grey;
+} */
+.completed {
+  background-color: green;
+}
+.attempted {
+  background-color: yellow;
+}
+.heading-input{
+    margin-bottom: 30px;
+}
+/* .reset-button-div{
+
+ margin-bottom: 50px;
+ padding: 10px;
+} */
+
+button {
+  margin: 10px;
+}
