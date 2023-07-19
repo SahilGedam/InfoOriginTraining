@@ -26,4 +26,6 @@ public interface QuestionRepo extends JpaRepository <Questions , Long> {
 	
 	@Modifying @Transactional @Query(value = "update questions set status = null", nativeQuery = true)
 	public void setStatusNull();
+	@Modifying @Transactional @Query(value = "update questions set selected = 0;", nativeQuery = true)
+	public void setSelectedZero();
 }

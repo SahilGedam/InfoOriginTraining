@@ -25,6 +25,8 @@ public class QuestionServices {
 	public void resetAll() {
 		cityRepo.setStatusNull();
 		questionRepo.setStatusNull();
+		questionRepo.setSelectedZero();
+		
 
 	}
 
@@ -45,6 +47,7 @@ public class QuestionServices {
 		} else {
 			updateQuestion.setStatus("attempted");
 		}
+		updateQuestion.setSelected(answer);
 		questionRepo.save(updateQuestion);
 
 	}
@@ -79,6 +82,7 @@ public class QuestionServices {
 			citySelected.setStatus("attempted");
 		}
 		cityRepo.save(citySelected);
+		
 
 	}
 

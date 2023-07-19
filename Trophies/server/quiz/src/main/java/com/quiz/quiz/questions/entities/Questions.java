@@ -26,6 +26,8 @@ public class Questions {
 	private String questionCity;
 	@Column(name = "question_no")
 	private long questionNo;
+	@Column(name = "selected")
+	private long selected;
 	public long getQuestionId() {
 		return questionId;
 	}
@@ -68,14 +70,20 @@ public class Questions {
 	public void setQuestionNo(long questionNo) {
 		this.questionNo = questionNo;
 	}
+	public long getSelected() {
+		return selected;
+	}
+	public void setSelected(long selected) {
+		this.selected = selected;
+	}
 	@Override
 	public String toString() {
 		return "Questions [questionId=" + questionId + ", questionBody=" + questionBody + ", questionOptions="
 				+ questionOptions + ", correctAnswer=" + correctAnswer + ", status=" + status + ", questionCity="
-				+ questionCity + ", questionNo=" + questionNo + "]";
+				+ questionCity + ", questionNo=" + questionNo + ", selected=" + selected + "]";
 	}
 	public Questions(long questionId, String questionBody, String questionOptions, long correctAnswer, String status,
-			String questionCity, long questionNo) {
+			String questionCity, long questionNo, long selected) {
 		super();
 		this.questionId = questionId;
 		this.questionBody = questionBody;
@@ -84,12 +92,12 @@ public class Questions {
 		this.status = status;
 		this.questionCity = questionCity;
 		this.questionNo = questionNo;
+		this.selected = selected;
 	}
 	public Questions() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 	
 
