@@ -1,13 +1,14 @@
 .parent {
   width: 100%;
   height: 90vh;
-  /* border: 1px solid red; */
+  
 }
 .trophies {
-  width: 55%;
+  /* border: 1px solid red; */
+  width: 25%;
   float: left;
-  /* border: 1px solid green; */
-  height: 650px;
+  
+  height: 450px;
   margin-top: 10px;
   display: flex;
   flex-direction: row;
@@ -15,10 +16,10 @@
 }
 .quiz {
   float: right;
-  /* border: 1px solid blue; */
-  height: 650px;
-  width: 45%;
-  margin-top: 10px;
+  /* border: 1px solid black; */
+  height: 350px;
+  width: 25%;
+  margin-top: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,23 +27,33 @@
 }
 .card-img-top {
   margin-top: 10px;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
 }
 .allTrophies {
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .card {
+  height: 100px;
+    width: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
-/* .not-touched {
-  background-color: grey;
-} */
+.card-body{
+  background-color: red;
+  width: 100%;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0%;
+  margin-right: 0%;
+  padding: 0%;
+}
 .completed {
   background-color: green;
 }
@@ -52,11 +63,7 @@
 .heading-input{
     margin-bottom: 30px;
 }
-/* .reset-button-div{
 
- margin-bottom: 50px;
- padding: 10px;
-} */
 
 button {
   margin: 10px;

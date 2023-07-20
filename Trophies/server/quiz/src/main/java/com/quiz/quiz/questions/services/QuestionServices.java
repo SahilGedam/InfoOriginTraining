@@ -20,18 +20,16 @@ public class QuestionServices {
 	@Autowired
 	CityRepo cityRepo;
 
-
-
 	public void resetAll() {
-		cityRepo.setStatusNull();
+		cityRepo.setCorrectZero();
+		cityRepo.setIncorrectZero();
 		questionRepo.setStatusNull();
 		questionRepo.setSelectedZero();
-		
 
 	}
 
 	public Questions getQuestionByCityName(@PathVariable String cityName, @PathVariable long questionId) {
-		
+
 		Questions returnQuestion = questionRepo.getQuestionByCityNameAndId(cityName, questionId);
 		returnQuestion.setCorrectAnswer(0);
 
@@ -49,6 +47,7 @@ public class QuestionServices {
 		}
 		updateQuestion.setSelected(answer);
 		questionRepo.save(updateQuestion);
+		updateStatusOfCity(cityName);
 
 	}
 
@@ -61,9 +60,9 @@ public class QuestionServices {
 
 		for (int i = 0; i < listOfQuestions.size(); i++) {
 			if (listOfQuestions.get(i).getStatus() == null) {
+				continue;
 
 			}
-
 			else if (listOfQuestions.get(i).getStatus().equals("completed")) {
 				questionsCompleted++;
 			} else if (listOfQuestions.get(i).getStatus().equals("attempted")) {
@@ -72,17 +71,10 @@ public class QuestionServices {
 
 		}
 
-		if (questionsCompleted == 5) {
-			citySelected.setStatus("completed");
+		citySelected.setCorrectAnswers(questionsCompleted);
+		citySelected.setIncorrectAnswers(questionsAttempted);
 
-		} else if (questionsAttempted > 0) {
-			citySelected.setStatus("attempted");
-
-		} else if (questionsCompleted > 0 && questionsCompleted < 5) {
-			citySelected.setStatus("attempted");
-		}
 		cityRepo.save(citySelected);
-		
 
 	}
 

@@ -16,8 +16,10 @@ public class Cities {
 	private long cityId;
 	@Column(name = "city_name")
 	private String cityName;
-	@Column(name = "status")
-	private String status;
+	@Column(name = "correct_answers")
+	private long correctAnswers;
+	@Column(name = "incorrect_answers")
+	private long incorrectAnswers;
 	public long getCityId() {
 		return cityId;
 	}
@@ -30,21 +32,29 @@ public class Cities {
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
-	public String getStatus() {
-		return status;
+	public long getCorrectAnswers() {
+		return correctAnswers;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setCorrectAnswers(long correctAnswers) {
+		this.correctAnswers = correctAnswers;
+	}
+	public long getIncorrectAnswers() {
+		return incorrectAnswers;
+	}
+	public void setIncorrectAnswers(long incorrectAnswers) {
+		this.incorrectAnswers = incorrectAnswers;
 	}
 	@Override
 	public String toString() {
-		return "Cities [cityId=" + cityId + ", cityName=" + cityName + ", status=" + status + "]";
+		return "Cities [cityId=" + cityId + ", cityName=" + cityName + ", correctAnswers=" + correctAnswers
+				+ ", incorrectAnswers=" + incorrectAnswers + "]";
 	}
-	public Cities(long cityId, String cityName, String status) {
+	public Cities(long cityId, String cityName, long correctAnswers, long incorrectAnswers) {
 		super();
 		this.cityId = cityId;
 		this.cityName = cityName;
-		this.status = status;
+		this.correctAnswers = correctAnswers;
+		this.incorrectAnswers = incorrectAnswers;
 	}
 	public Cities() {
 		super();

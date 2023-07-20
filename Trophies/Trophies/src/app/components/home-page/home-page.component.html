@@ -1,46 +1,68 @@
 <div class="parent">
-  <div class="row">
+  <div class="rows">
     <div class="trophies">
       <div *ngFor="let city of allTrophies" class="allTrophies">
-        <div [ngClass]="city.status" class="card" style="width: 10rem">
+        <div
+        matBadge="{{city.correctAnswers}}" 
+          class="card"
+          (click)="navigateByDiv(city.cityName)"
+          style="max-width: 8 rem"
+        >
           <img
             class="card-img-top"
             src="../../../assets/trophy-png-30582.png"
             alt="Card image cap"
           />
-          <div class="card-body">
-            <h5  class="card-title">{{ city.cityName }}</h5>
+
+          <div
+            [ngClass]="{
+              completed: city.correctAnswers == 5,
+              attempted:
+                city.incorrectAnswers > 0 ||
+                (city.correctAnswers > 0 && city.correctAnswers < 5)
+            }"
+            class="card-body"
+          >
+            <small
+              ><p class="card-title">{{ city.cityName }}</p></small
+            >
           </div>
         </div>
       </div>
     </div>
     <div class="quiz">
-    
       <div *ngIf="!congratulationsMessage" class="heading-input">
         <h4>Take a Quiz</h4>
       </div>
       <div *ngIf="congratulationsMessage" class="heading-input">
         <h4>
-          {{congratulationsMessage}}
+          {{ congratulationsMessage }}
         </h4>
       </div>
       <div *ngIf="!congratulationsMessage" class="input-form">
         <mat-form-field>
           <mat-label>Select City</mat-label>
           <mat-select [(ngModel)]="selectedCity">
-            <mat-option *ngFor="let city of allTrophies" [value]="city.cityName">
+            <mat-option
+              *ngFor="let city of allTrophies"
+              [value]="city.cityName"
+            >
               {{ city.cityName }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="btn-div">
-        <button *ngIf="!congratulationsMessage" (click)="routeToQuiz()" mat-button color="primary">
+        <button
+          *ngIf="!congratulationsMessage"
+          (click)="routeToQuiz()"
+          mat-button
+          color="primary"
+        >
           submit
         </button>
         <button (click)="resetAll()" mat-button color="warn">reset all</button>
       </div>
     </div>
   </div>
-</div> 
-
+</div>

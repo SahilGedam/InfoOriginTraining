@@ -14,8 +14,7 @@ export class QuizPageComponent implements OnInit {
   questionOptionsArray: any[] = [1, 2, 3, 4];
   questionBody = '';
   index = 1;
-  isChecked = false;
-  selectedOption=0;
+  selectedOption: any;
 
   ngOnInit(): void {
     this.cityName = this.activatedRoute.snapshot.paramMap.get('cityName');
@@ -37,48 +36,38 @@ export class QuizPageComponent implements OnInit {
 
   navigateHome() {
     this.updateStatusOfCity();
-    this.router.navigate(['/home']);
   }
   onNext() {
-    console.log(this.isChecked);
-    this.isChecked = false;
     if (this.index < 5) {
       this.index++;
       this.getQuestionByCityName();
     }
-    console.log(this.isChecked);
-    
   }
   onPrevious() {
-    console.log(this.isChecked);
-    this.isChecked = false;
     if (this.index > 1) {
       this.index--;
       this.getQuestionByCityName();
     }
-    console.log(this.isChecked);
   }
-  // onSave(data: any) {
+
   onSave() {
-    console.log(this.isChecked);
-    this.isChecked = false;
-    console.log(this.isChecked);
     let answer = this.selectedOption;
-    // let answer = data.radioOptions;
-    // if (!answer) {
-    //   answer = 0;
-    // }
-    this.dataservice.saveAnswer(this.cityName, this.index, answer).subscribe(
-      (data) => {},
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (answer) {
+      this.dataservice.saveAnswer(this.cityName, this.index, answer).subscribe(
+        (data) => {},
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+
     this.onNext();
   }
   updateStatusOfCity() {
     this.dataservice.updateStatusOfCity(this.cityName).subscribe(
-      (data) => {},
+      (data) => {
+        this.router.navigate(['/home']);
+      },
       (error) => {
         console.log(error);
       }
@@ -92,6 +81,7 @@ export class QuizPageComponent implements OnInit {
           this.currentQuestion = data;
           this.questionBody = this.currentQuestion.questionBody;
           this.questionOptions = this.currentQuestion.questionOptions;
+          this.selectedOption = this.currentQuestion.selected;
 
           this.splitQuestionOptions();
         },

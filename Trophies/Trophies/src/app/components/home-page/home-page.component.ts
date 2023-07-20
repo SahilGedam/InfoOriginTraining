@@ -12,8 +12,6 @@ export class HomePageComponent implements OnInit {
   selectedCity: string = '';
   congratulationsMessage: string = '';
   ngOnInit(): void {
-    console.log('initialized');
-
     this.getAllTrophies();
   }
   constructor(
@@ -54,6 +52,10 @@ export class HomePageComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  navigateByDiv(data: any) {
+    this.selectedCity = data;
+    this.routeToQuiz();
   }
   routeToQuiz() {
     this.router.navigate([`/quiz/${this.selectedCity}`]);

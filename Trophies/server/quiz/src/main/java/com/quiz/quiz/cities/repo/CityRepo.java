@@ -18,7 +18,12 @@ public interface CityRepo extends JpaRepository<Cities, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "update cities set status = null", nativeQuery = true)
-	public void setStatusNull();
+	@Query(value = "update cities set incorrect_answers = 0", nativeQuery = true)
+	public void setIncorrectZero();
+	
+	@Modifying
+	@Transactional
+	@Query(value = "update cities set correct_answers = 0", nativeQuery = true)
+	public void setCorrectZero();
 
 }

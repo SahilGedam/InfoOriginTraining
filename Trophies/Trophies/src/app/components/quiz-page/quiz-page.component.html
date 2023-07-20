@@ -1,5 +1,5 @@
 <div class="parent">
-  <div class="top-part">
+  <div class="top-part row">
     <div class="heading">
       <h1>{{ cityName }}</h1>
     </div>
@@ -22,83 +22,32 @@
     </div>
   </div>
 
-  <div class="question-number">
-    question number
-    {{ index }}
-  </div>
   <div class="question-body">
-    <h3>
-      {{ questionBody }}
-    </h3>
+    <h3>{{ index }} . {{ questionBody }}</h3>
   </div>
   <div class="option-list">
     <mat-radio-group aria-label="Select an option" [(ngModel)]="selectedOption">
       <div class="option-div">
-      <mat-radio-button [checked]="isChecked" value="1">
-        {{ questionOptionsArray[0] }}</mat-radio-button
-      ></div> <div class="option-div">
-      <mat-radio-button [checked]="isChecked" value="2">
-        {{ questionOptionsArray[1] }}</mat-radio-button
-      ></div> <div class="option-div">
-      <mat-radio-button [checked]="isChecked" value="3">
-        {{ questionOptionsArray[2] }}</mat-radio-button
-      ></div> <div class="option-div">
-      <mat-radio-button [checked]="isChecked" value="4">
-        {{ questionOptionsArray[3] }}</mat-radio-button
-      ></div>
+        <mat-radio-button [checked]="selectedOption == 1" [value]="1">
+          {{ questionOptionsArray[0] }}</mat-radio-button
+        >
+      </div>
+      <div class="option-div">
+        <mat-radio-button [checked]="selectedOption == 2" [value]="2">
+          {{ questionOptionsArray[1] }}</mat-radio-button
+        >
+      </div>
+      <div class="option-div">
+        <mat-radio-button [checked]="selectedOption == 3" [value]="3">
+          {{ questionOptionsArray[2] }}</mat-radio-button
+        >
+      </div>
+      <div class="option-div">
+        <mat-radio-button [checked]="selectedOption == 4" [value]="4">
+          {{ questionOptionsArray[3] }}</mat-radio-button
+        >
+      </div>
     </mat-radio-group>
-    <!-- <form #basicForm="ngForm">
-      <div class="option-div">
-        <input
-          ngModel
-          type="radio"
-          value="1"
-          name="radioOptions"
-          id="option1"
-        />
-        <label for="option1"
-          ><span>
-            {{ questionOptionsArray[0] }}
-          </span></label
-        >
-      </div>
-      <div class="option-div">
-        <input
-          ngModel
-          type="radio"
-          value="2"
-          name="radioOptions"
-          id="option2"
-        />
-        <label for="option2"
-          ><span>{{ questionOptionsArray[1] }}</span></label
-        >
-      </div>
-      <div class="option-div">
-        <input
-          ngModel
-          type="radio"
-          value="3"
-          name="radioOptions"
-          id="option3"
-        />
-        <label for="option3">
-          <span>{{ questionOptionsArray[2] }}</span></label
-        >
-      </div>
-      <div class="option-div">
-        <input
-          ngModel
-          type="radio"
-          value="4"
-          name="radioOptions"
-          id="option4"
-        />
-        <label for="option4">
-          <span>{{ questionOptionsArray[3] }}</span></label
-        >
-      </div>
-    </form> -->
   </div>
   <div class="action-buttons">
     <button class="btn btn-outline-dark" (click)="onPrevious()">
@@ -133,7 +82,7 @@
         />
       </svg>
     </button>
-    <!-- <button class="btn btn-outline-dark" (click)="onSave(basicForm.value)"> -->
+
     <button class="btn btn-outline-dark" (click)="onSave()">
       save
       <svg

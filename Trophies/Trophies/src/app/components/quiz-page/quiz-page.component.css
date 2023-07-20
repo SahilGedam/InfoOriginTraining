@@ -4,3 +4,15 @@
 .option-div{
     margin: 10px;
 }
+.top-part{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+.heading{
+    width: 90%;
+}
+.home-page{
+
+    width: 10%;
+}
