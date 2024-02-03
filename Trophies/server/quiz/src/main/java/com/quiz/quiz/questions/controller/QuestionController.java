@@ -19,6 +19,11 @@ import com.quiz.quiz.questions.services.QuestionServices;
 public class QuestionController {
 	@Autowired
 	QuestionServices questionServices;
+	
+	@GetMapping(value = "hello")
+	public String getHello() {
+		return "Hello";
+	}
 
 
 
